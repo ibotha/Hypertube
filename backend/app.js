@@ -2,6 +2,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 const session = require('express-session');
+const generalRoutes = require('./routes/general');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -20,5 +21,7 @@ app.use((req, res, next) => {
 	);
 	next();
 });
+
+app.use("/", generalRoutes);
 
 module.exports = app;
