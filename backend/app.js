@@ -22,6 +22,11 @@ app.use((req, res, next) => {
 	next();
 });
 
+
+//Use for standard routing, eg 404, index etc.
 app.use("/", generalRoutes);
+
+//Example use for users ->
+//app.use('/user/', userRoutes);
 
 module.exports = app;
