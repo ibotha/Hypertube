@@ -2,6 +2,8 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 const session = require('express-session');
+
+//Routes const
 const generalRoutes = require('./routes/general');
 
 app.use(bodyParser.json());
