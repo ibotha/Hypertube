@@ -5,6 +5,7 @@ const session = require('express-session');
 
 //Routes const
 const generalRoutes = require('./routes/general');
+const userRoutes = require('./routes/users');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -29,6 +30,17 @@ app.use((req, res, next) => {
 app.use("/", generalRoutes);
 
 //Example use for users ->
-//app.use('/user/', userRoutes);
+app.use("/user/", userRoutes);
+
+app.post('*', function(req, res, next) {
+	//Technically a 404
+	res.end(404);
+})
+
+app.get('*', function(req, res, next) {
+	//Technically a 404
+	res.end('{"Msg":"404"}');
+});
+
 
 module.exports = app;
