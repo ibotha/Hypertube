@@ -1,7 +1,6 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
-const pageRoutes = require('./routes/pages');
 const session = require('express-session');
 
 app.use(bodyParser.json());
@@ -21,7 +20,5 @@ app.use((req, res, next) => {
 	);
 	next();
 });
-
-app.use("/", pageRoutes);
 
 module.exports = app;
