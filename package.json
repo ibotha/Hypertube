@@ -1,0 +1,22 @@
+{
+  "name": "hypertube",
+  "version": "1.0.0",
+  "description": "A Streaming Website",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ibotha/Hypertube.git"
+  },
+  "author": "ibotha jwolf jdorner mmacdonna",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ibotha/Hypertube/issues"
+  },
+  "homepage": "https://github.com/ibotha/Hypertube#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
