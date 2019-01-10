@@ -12,21 +12,13 @@ export class UserService {
 
   addUser(user: FormGroup) {
     this.httpclient.post<{message: string}>('http://localhost:3000/user/create', user.value).subscribe(responsedata => {
-      this.router.navigate(['/']);
+      this.router.navigate(['/login']);
     });
   }
-/*
-  addUser(user: User) {
-    console.log(user);
-    const post = new FormData();
-    post.append('firstname', user.firstname);
-    post.append('lastname', user.lastname);
-    post.append('email', user.email);
-    post.append('password', user.password);
-    console.dir(post);
-    // this.httpclient.post<{message: string, user: User}>('http://localhost:3000/user/create', post).subscribe(responsedata => {
-    //   this.router.navigate(['/' + responsedata]);
-    // });
+
+  loginUser(user: FormGroup) {
+    this.httpclient.post<{message: string}>('http://localhost:3000/user/login', user.value).subscribe(responsedata => {
+      this.router.navigate(['/signup']);
+    });
   }
-*/
 }

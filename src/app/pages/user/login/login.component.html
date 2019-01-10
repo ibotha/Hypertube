@@ -1,5 +1,5 @@
 <mat-card class="signup-container">
-    <form [formGroup]="loginform" class="signup-container">
+    <form (submit)="onSubmit()" [formGroup]="loginform" class="signup-container">
       <mat-form-field>
           <input
             matInput
@@ -19,10 +19,11 @@
           <mat-error *ngIf="loginform.get('password').invalid">Needs to be min 8 characters, atleast 1 Upper, 1 Lower, 1 number and 1 special character</mat-error>
       </mat-form-field>
       <div *ngIf="loginform.valid">
-        <a
+        <button
           color="primary"
           mat-raised-button
-          >Sign Up</a>
+          type="submit"
+          >Login</button>
       </div>
       <!-- SSO -->
       <div class="OmniAuths">

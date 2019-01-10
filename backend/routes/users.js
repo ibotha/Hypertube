@@ -16,31 +16,32 @@ router.post('/create', function(req, res, next) {
       password: hash
     });
     user.save().then(() => {
-      console.log("User Created");
-      res.status(201).json({message: "Post added successfully"});
+      res.status(201).json({message: "User added successfully"});
     }).catch(err => {
-      console.log("Isard fault =? " + err);
-      res.status(201).json({message: "Post added unsuccessfully"});
+      res.status(201).json({message: "User added unsuccessfully " + err});
     })
 });
 
-router.get('/login', function(req, res, next) {
+router.post('/login', function(req, res, next) {
   var email = req.body.email;
   var password = req.body.password;
-  const user = new User({
-    email: email
-  });
-  user.find().then(res => {
-    let compare = bcrypt.compareSync(password, res['password']);
-    if (compare)
+  User.find({email: email}, (err, doc) => {
+    if (doc.length > 0)
     {
-      console.log("Connected user");
+      let workingDoc = doc[0];
+      if (workingDoc)
+      {
+        let hash = bcrypt.compareSync(password, workingDoc['password']);
+        if (hash) {
+          res.status(201).json({message: "Success"});
+        } else {
+          res.status(201).json({message: "Failure"});
+        }
+      }
     } else {
-      console.log("Failed to aunthenticate");
+      res.status(201).json({message: "No Docs found"});
     }
-  }).catch(err => {
-    console.log(err);
-  })
+  });
 });
 
 module.exports = router;
