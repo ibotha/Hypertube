@@ -33,7 +33,7 @@ constructor (private userService: UserService) {
       email: this.signup.value.email,
       password: this.signup.value.password
     };
-    this.userService.addUser(user);
+    this.userService.addUser(this.signup);
     // this.signup.reset();
   }
 

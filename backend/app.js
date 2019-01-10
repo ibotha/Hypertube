@@ -10,6 +10,7 @@ const userRoutes = require('./routes/users');
 
 const url = 'mongodb://localhost:27017/Hypertube';
 
+mongoose.set('useCreateIndex', true)
 mongoose.connect(url, { useNewUrlParser: true }).then(() => {
   console.log("Database connected")
 }).catch(err => {

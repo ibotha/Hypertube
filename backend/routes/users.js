@@ -8,20 +8,19 @@ router.post('/create', function(req, res, next) {
   var lastname = req.body.lastname;
   var email = req.body.email;
   var password = req.body.password;
-  console.log(req.body);
     let hash = bcrypt.hashSync(password, 10);
     const user = new User({
-      firstname: firstname,
-      lastname: lastname,
+      firstName: firstname,
+      lastName: lastname,
       email: email,
       password: hash
     });
     user.save().then(() => {
       console.log("User Created");
-      res.end('{"msg":"OK"}');
+      res.status(201).json({message: "Post added successfully"});
     }).catch(err => {
-      console.log("Isard fault");
-      res.end('{"msg":"FUCK!"}');
+      console.log("Isard fault =? " + err);
+      res.status(201).json({message: "Post added unsuccessfully"});
     })
 });
 
