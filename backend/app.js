@@ -2,15 +2,24 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 const session = require('express-session');
+const mongoose = require('mongoose');
 
 //Routes const
 const generalRoutes = require('./routes/general');
 const userRoutes = require('./routes/users');
 
+const url = 'mongodb://localhost:27017/Hypertube';
+
+mongoose.connect(url, { useNewUrlParser: true }).then(() => {
+  console.log("Database connected")
+}).catch(err => {
+  console.error("Connecting to error =>" + err);
+})
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(session({secret: "American Pie: Beta House", saveUninitialized: false, resave: false}));
+app.use(session({ secret: "American Pie: Beta House", saveUninitialized: false, resave: false }));
 
 app.use((req, res, next) => {
 	res.setHeader("Access-Control-Allow-Origin", "*");

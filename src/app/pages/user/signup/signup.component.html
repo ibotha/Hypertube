@@ -1,5 +1,5 @@
 <mat-card class="signup-container">
-  <form [formGroup]="signup" class="signup-container">
+  <form (submit)="onSubmit()" [formGroup]="signup" class="signup-container">
     <mat-form-field>
       <input
         matInput
@@ -41,15 +41,16 @@
           matInput
           name='confirm-password'
           type='password'
-          formControlName='confirm-password'
+          formControlName='confirmPassword'
           placeholder="Confirm Password">
-        <mat-error *ngIf="signup.get('password').value != signup.get('confirm-password').value">Passwords need to match</mat-error>
+        <mat-error *ngIf="signup.get('password').value != signup.get('confirmPassword').value">Passwords need to match</mat-error>
     </mat-form-field>
-    <div *ngIf="signup.valid && (signup.get('password').value == signup.get('confirm-password').value)">
-      <a
+    <div *ngIf="signup.valid && (signup.get('password').value == signup.get('confirmPassword').value)">
+      <button
         color="primary"
         mat-raised-button
-        >Sign Up</a>
+        type="submit"
+        >Sign Up</button>
     </div>
     <!-- SSO -->
     <div class="OmniAuths">
