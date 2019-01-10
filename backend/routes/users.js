@@ -25,7 +25,22 @@ router.post('/create', function(req, res, next) {
 });
 
 router.get('/login', function(req, res, next) {
-	res.end('{"msg":"OK"}');
+  var email = req.body.email;
+  var password = req.body.password;
+  const user = new User({
+    email: email
+  });
+  user.find().then(res => {
+    let compare = bcrypt.compareSync(password, res['password']);
+    if (compare)
+    {
+      console.log("Connected user");
+    } else {
+      console.log("Failed to aunthenticate");
+    }
+  }).catch(err => {
+    console.log(err);
+  })
 });
 
 module.exports = router;
