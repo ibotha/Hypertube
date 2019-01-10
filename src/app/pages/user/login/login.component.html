@@ -1,1 +1,39 @@
-<h1> This is a login </h1>
+<mat-card class="signup-container">
+    <form [formGroup]="loginform" class="signup-container">
+      <mat-form-field>
+          <input
+            matInput
+            name='email'
+            type='text'
+            formControlName='email'
+            placeholder="Email">
+          <mat-error *ngIf="loginform.get('email').invalid">Needs to be a valid email for e.g. 'email@email.com'</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+          <input
+            matInput
+            name='password'
+            type='password'
+            formControlName='password'
+            placeholder="Password">
+          <mat-error *ngIf="loginform.get('password').invalid">Needs to be min 8 characters, atleast 1 Upper, 1 Lower, 1 number and 1 special character</mat-error>
+      </mat-form-field>
+      <div *ngIf="loginform.valid">
+        <a
+          color="primary"
+          mat-raised-button
+          >Sign Up</a>
+      </div>
+      <!-- SSO -->
+      <div class="OmniAuths">
+        <a class="red"
+          color="primary"
+          mat-raised-button
+          >Google +</a>
+        <a class="black"
+        color="primary"
+        mat-raised-button
+        >Intra 42</a>
+      </div>
+    </form>
+  </mat-card>

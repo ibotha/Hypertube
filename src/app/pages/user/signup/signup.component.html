@@ -1,1 +1,66 @@
-<h1> This is a Signup </h1>
+<mat-card class="signup-container">
+  <form [formGroup]="signup" class="signup-container">
+    <mat-form-field>
+      <input
+        matInput
+        name='firstname'
+        type='text'
+        formControlName='firstname'
+        placeholder="First Name">
+        <mat-error *ngIf="signup.get('firstname').invalid">Needs to be min 3, max 150 characters</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input
+          matInput
+          name='lastname'
+          type='text'
+          formControlName='lastname'
+          placeholder="Last Name">
+        <mat-error *ngIf="signup.get('lastname').invalid">Needs to be min 3, max 150 characters</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input
+          matInput
+          name='email'
+          type='text'
+          formControlName='email'
+          placeholder="Email">
+        <mat-error *ngIf="signup.get('email').invalid">Needs to be a valid email for e.g. 'email@email.com'</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input
+          matInput
+          name='password'
+          type='password'
+          formControlName='password'
+          placeholder="Password">
+        <mat-error *ngIf="signup.get('password').invalid">Needs to be min 8 characters, atleast 1 Upper, 1 Lower, 1 number and 1 special character</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input
+          matInput
+          name='confirm-password'
+          type='password'
+          formControlName='confirm-password'
+          placeholder="Confirm Password">
+        <mat-error *ngIf="signup.get('password').value != signup.get('confirm-password').value">Passwords need to match</mat-error>
+    </mat-form-field>
+    <div *ngIf="signup.valid && (signup.get('password').value == signup.get('confirm-password').value)">
+      <a
+        color="primary"
+        mat-raised-button
+        >Sign Up</a>
+    </div>
+    <!-- SSO -->
+    <div class="OmniAuths">
+      <a class="red"
+        color="primary"
+        mat-raised-button
+        >Google +</a>
+      <a class="black"
+      color="primary"
+      mat-raised-button
+      >Intra 42</a>
+    </div>
+  </form>
+</mat-card>
