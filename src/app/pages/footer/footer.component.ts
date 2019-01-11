@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 
 export class FooterComponent {
-  copyright = 'iBotha, jWolf';
+  copyright = 'iBotha, jDorner, jWolf, mMacdona';
 }
