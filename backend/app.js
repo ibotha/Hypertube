@@ -7,6 +7,10 @@ const mongoose = require('mongoose');
 //Routes const
 const generalRoutes = require('./routes/general');
 const userRoutes = require('./routes/users');
+const googleRoute = require('./routes/gOauth');
+const facebookRoute = require('./routes/fOauth');
+const intraRoute = require('./routes/iOauth');
+const twitterRoute = require('./routes/tOauth');
 
 const url = 'mongodb://localhost:27017/Hypertube';
 
@@ -41,6 +45,10 @@ app.use("/", generalRoutes);
 
 //Example use for users ->
 app.use("/user/", userRoutes);
+app.use("/google/", googleRoute);
+app.use("/facebook/", facebookRoute);
+app.use("/intra/", intraRoute);
+app.use("/twitter/", twitterRoute);
 
 app.post('*', function(req, res, next) {
 	//Technically a 404

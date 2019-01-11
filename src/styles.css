@@ -7,15 +7,15 @@
 
 body {
   margin: 0;
-  background-color: rgb(35, 35, 35);
+  background-color: rgb(35, 35, 35) !important;
   color: whitesmoke;
 }
 
 footer {
   font-size: 1.5vh;
   position: fixed;
-  bottom: 0;
+  bottom: 0 !important;
   width: 100%;
   text-align: center;
-  height: 60px;
+  height: 60px !important;
 }
