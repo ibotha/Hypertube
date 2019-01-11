@@ -2,6 +2,7 @@
   "name": "hypertube",
   "version": "0.0.0",
   "scripts": {
+    "gcom": "git add . && git commit -m 'Auto' && git push",
     "host": "ng serve --port 8080",
     "server": "nodemon server.js",
     "ng": "ng",
@@ -45,7 +46,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.12.1",
-    "@angular/cli": "~7.0.6",
+    "@angular/cli": "^7.2.1",
     "@angular/compiler-cli": "~7.0.0",
     "@angular/language-service": "~7.0.0",
     "@types/jasmine": "~2.8.8",

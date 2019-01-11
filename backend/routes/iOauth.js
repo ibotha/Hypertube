@@ -12,7 +12,7 @@ const FORTYTWO_APP_SECRET = FortyTwoCred.FORTYTWO_APP_SECRET;
 passport.use(new FortyTwoStrategy({
   clientID: FORTYTWO_APP_ID,
   clientSecret: FORTYTWO_APP_SECRET,
-  callbackURL: "http://127.0.0.1:3000/auth/42/callback"
+  callbackURL: "http://localhost:3000/auth/42/callback"
 },
 function(accessToken, refreshToken, profile, cb) {
   User.findOrCreate({ fortytwoId: profile.id }, function (err, user) {
@@ -24,7 +24,7 @@ function(accessToken, refreshToken, profile, cb) {
 
 router.get('/', passport.authenticate('42'));
 
-router.get('/acallback',
+router.get('/callback',
   passport.authenticate('42', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
