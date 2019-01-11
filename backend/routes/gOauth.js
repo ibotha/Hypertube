@@ -7,8 +7,6 @@ const GoogleStrategy  = require('passport-google-oauth20').Strategy;
 const passport        = require('passport');
 const googleCred      = require('../credentials/google-cred.json');
 
-console.log(googleCred);
-
 const GOOGLE_CLIENT_ID = googleCred.web.client_id
 const GOOGLE_CLIENT_SECRET = googleCred.web.client_secret;
 
