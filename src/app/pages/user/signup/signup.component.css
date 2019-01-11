@@ -52,6 +52,10 @@ mat-error {
   color: whitesmoke;
 }
 
+.OmniAuths {
+  margin-bottom: 10px;
+}
+
 .OmniAuths > a {
   margin-top: 10px;
   width: 120px;
@@ -64,6 +68,14 @@ mat-error {
 
 .OmniAuths > .black {
   background-color: #00babc;
+}
+
+.OmniAuths > .blue-facebook {
+  background-color: rgb(68, 105, 176)
+}
+
+.OmniAuths > .blue-twitter {
+  background-color: rgb(42, 163, 239);
 }
 
 .signup-button-div {
