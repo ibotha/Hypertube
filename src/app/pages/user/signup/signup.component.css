@@ -65,3 +65,12 @@ mat-error {
 .OmniAuths > .black {
   background-color: #00babc;
 }
+
+.signup-button-div {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.signup-button-div > button {
+  width: 100%;
+}

@@ -22,6 +22,7 @@ import { FooterComponent } from './pages/footer/footer.component';
 import { LoginComponent } from './pages/user/login/login.component';
 import { SignupComponent } from './pages/user/signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { JohnTravoltaComponent } from './pages/404/johnTravolta.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HeaderComponent,
     FooterComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    JohnTravoltaComponent
   ],
   imports: [
     BrowserModule,

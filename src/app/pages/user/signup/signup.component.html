@@ -45,11 +45,18 @@
           placeholder="Confirm Password">
         <mat-error *ngIf="signup.get('password').value != signup.get('confirmPassword').value">Passwords need to match</mat-error>
     </mat-form-field>
-    <div *ngIf="signup.valid && (signup.get('password').value == signup.get('confirmPassword').value)">
+    <div class="signup-button-div">
       <button
+        *ngIf="signup.valid && (signup.get('password').value == signup.get('confirmPassword').value)"
         color="primary"
         mat-raised-button
         type="submit"
+        >Sign Up</button>
+        <button
+        *ngIf="signup.invalid || (signup.get('password').value != signup.get('confirmPassword').value)"
+        color="primary"
+        mat-raised-button
+        disabled
         >Sign Up</button>
     </div>
     <!-- SSO -->
