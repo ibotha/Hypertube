@@ -2,6 +2,8 @@
   "name": "hypertube",
   "version": "0.0.0",
   "scripts": {
+    "host": "ng serve --port 8080",
+    "server": "nodemon server.js",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",

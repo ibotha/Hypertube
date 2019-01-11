@@ -6,7 +6,8 @@ const userSchema = mongoose.Schema({
   email: { type: String, required: true, unique: true, index: true, lowercase: true },
   password: { type: String, required: true },
   googleID: { type: String, require: false },
-  intraID: { type: String, required: false }
+  intraID: { type: String, required: false },
+  facebookID: { type: String, required: false }
 })
 
 module.exports = mongoose.model("User", userSchema);
