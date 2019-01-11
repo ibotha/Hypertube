@@ -11,6 +11,7 @@ const googleRoute = require('./routes/gOauth');
 const facebookRoute = require('./routes/fOauth');
 const intraRoute = require('./routes/iOauth');
 const twitterRoute = require('./routes/tOauth');
+const passport = require('passport');
 
 const url = 'mongodb://localhost:27017/Hypertube';
 
@@ -23,6 +24,9 @@ mongoose.connect(url, { useNewUrlParser: true }).then(() => {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(session({ secret: "American Pie: Beta House", saveUninitialized: false, resave: false }));
 
@@ -45,10 +49,10 @@ app.use("/", generalRoutes);
 
 //Example use for users ->
 app.use("/user/", userRoutes);
-app.use("/google/", googleRoute);
-app.use("/facebook/", facebookRoute);
-app.use("/intra/", intraRoute);
-app.use("/twitter/", twitterRoute);
+app.use("/auth/google/", googleRoute);
+app.use("/auth/facebook/", facebookRoute);
+app.use("/auth/42/", intraRoute);
+app.use("/auth/twitter/", twitterRoute);
 
 app.post('*', function(req, res, next) {
 	//Technically a 404
