@@ -64,9 +64,17 @@ app.get('*', function(req, res, next) {
 	res.end('{"Msg":"404"}');
 });
 
-const l = require('./functions/fetchJsonYTS');
-l.getList(1, cb => {
-	console.log(cb);
-})
+const test = require('./functions/fetchJsonYTS');
+test.getList(2, cb => {
+	//const data = JSON.parse(cb);
+	const data = JSON.parse(cb).data.movies;
+	data.forEach(result => {
+		console.log(result);
+	})
+});
+
+test.getUpcoming(cb => {
+	//console.log(cb);
+});
 
 module.exports = app;
