@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "gcom": "git add . && git commit -m 'Auto' && git push",
+    "start-test": "ng serve --port 8080 | nodemon server.js",
     "host": "ng serve --port 8080",
     "server": "nodemon server.js",
     "ng": "ng",

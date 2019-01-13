@@ -64,5 +64,9 @@ app.get('*', function(req, res, next) {
 	res.end('{"Msg":"404"}');
 });
 
+const l = require('./functions/fetchJsonYTS');
+l.getList(1, cb => {
+	console.log(cb);
+})
 
 module.exports = app;
