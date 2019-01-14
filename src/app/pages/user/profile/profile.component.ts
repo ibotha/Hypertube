@@ -26,7 +26,6 @@ export class ProfileComponent  implements OnInit {
 
   ngOnInit() {
     this.userService.getUser().subscribe(res => {
-      console.log(res['passport']);
       this.parsed = res['passport'];
     });
   }
