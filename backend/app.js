@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const session = require('express-session');
 const mongoose = require('mongoose');
+const cors     = require('cors');
 
 //Routes const
 const generalRoutes = require('./routes/general');
@@ -38,10 +39,14 @@ passport.deserializeUser(function(id, done) {
 
 });
 
-app.use(session({ secret: "American Pie: Beta House", saveUninitialized: false, resave: false }));
+app.use(session({ secret: "American Pie: Beta House", saveUninitialized: true, resave: true, cookie: { secure: false } }));
+
+app.use(cors({origin: [
+  "http://localhost:8080"
+], credentials: true}));
 
 app.use((req, res, next) => {
-	res.setHeader("Access-Control-Allow-Origin", "*");
+	res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
 	res.setHeader(
 	  "Access-Control-Allow-Headers",
 	  "Origin, X-Requested-With, Content-Type, Accept"

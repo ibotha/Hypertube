@@ -42,10 +42,10 @@ function(accessToken, refreshToken, profile, cb) {
 router.get('/', passport.authenticate('42'));
 
 router.get('/callback',
-  passport.authenticate('42', { failureRedirect: '/login' }),
+  passport.authenticate('42', { failureRedirect: 'http://localhost:8080/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/');
+    res.redirect('http://localhost:8080/profile');
 });
 
 module.exports = router;
