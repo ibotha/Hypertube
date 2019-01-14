@@ -2,7 +2,7 @@
   "name": "hypertube",
   "version": "0.0.0",
   "scripts": {
-    "gcom": "git add . && git commit -m 'Auto' && git push",
+    "gcom": "git add . && git commit -m '$M' && git push",
     "start-test": "ng serve --port 8080 | nodemon server.js",
     "host": "ng serve --port 8080",
     "server": "nodemon server.js",
@@ -28,6 +28,7 @@
     "@angular/router": "~7.0.0",
     "bcrypt": "^3.0.3",
     "core-js": "^2.5.4",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "hammerjs": "^2.0.8",

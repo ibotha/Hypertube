@@ -2,6 +2,7 @@ const express		      = require('express');
 const router		      = express.Router();
 const bcrypt          = require('bcrypt');
 const User            = require('../database/user.schema');
+const ssoID            = require('../database/ssoid.schema');
 const TwitterStrategy  = require('passport-twitter').Strategy;
 const passport        = require('passport');
 const TwitterCred     = require("../credentials/twitter-cred.json");
@@ -15,9 +16,23 @@ passport.use(new TwitterStrategy({
   callbackURL: "http://localhost:3000/auth/twitter/callback"
 },
 function(token, tokenSecret, profile, cb) {
-    User.findOrCreate({ twitterId: profile.id }, function (err, user) {
-      return cb(err, user);
-    });
+   ssoID.findOne( { ssoID: { twitter: profile.id } } ).then(res => {
+    if (res) {
+      return cb(null, res);
+    } else {
+      var name = profile._json.name.split(' ');
+      var u = new ssoID({
+        firstName: name[0],
+        lastName: name[name.length - 1],
+        ssoID: { twitter: profile.id }
+      });
+      u.save().then(res => {
+        return cb(null, res);
+      }).catch(err => {
+
+      })
+    }
+  }).catch(err => {});
   }
 ));
 
@@ -25,10 +40,10 @@ function(token, tokenSecret, profile, cb) {
 router.get('/', passport.authenticate('twitter'));
 
 router.get('/callback',
-  passport.authenticate('twitter', { failureRedirect: '/login' }),
+  passport.authenticate('twitter', { failureRedirect: 'http://localhost:8080/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/');
+    res.redirect('http://localhost:8080/profile');
 });
 
 module.exports = router;

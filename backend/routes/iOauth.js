@@ -2,6 +2,7 @@ const express		      = require('express');
 const router		      = express.Router();
 const bcrypt          = require('bcrypt');
 const User            = require('../database/user.schema');
+const ssoID            = require('../database/ssoid.schema');
 const FortyTwoStrategy  = require('passport-42').Strategy;
 const passport        = require('passport');
 const FortyTwoCred    = require('../credentials/intra-cred.json');
@@ -15,10 +16,24 @@ passport.use(new FortyTwoStrategy({
   callbackURL: "http://localhost:3000/auth/42/callback"
 },
 function(accessToken, refreshToken, profile, cb) {
-  console.log(profile);
-  //User.findOrCreate({ fortytwoId: profile.id }, function (err, user) {
-  //  return cb(err, user);
-  //});
+  ssoID.findOne( { ssoID: { 42: profile._json.id.toString() } } ).then(res => {
+    if (res) {
+      return cb(null, res);
+    } else {
+      var u = new ssoID({
+        firstName: profile._json.first_name,
+        lastName: profile._json.last_name,
+        ssoID: { 42: profile._json.id.toString() }
+      });
+      u.save().then(res => {
+        return cb(null, res);
+      }).catch(err => {
+
+      })
+    }
+  }).catch(err => {
+
+  });
 
 }
 ));
@@ -27,10 +42,10 @@ function(accessToken, refreshToken, profile, cb) {
 router.get('/', passport.authenticate('42'));
 
 router.get('/callback',
-  passport.authenticate('42', { failureRedirect: '/login' }),
+  passport.authenticate('42', { failureRedirect: 'http://localhost:8080/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/');
+    res.redirect('http://localhost:8080/profile');
 });
 
 module.exports = router;

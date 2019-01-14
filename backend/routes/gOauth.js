@@ -2,6 +2,7 @@ const express		      = require('express');
 const router		      = express.Router();
 const bcrypt          = require('bcrypt');
 const User            = require('../database/user.schema');
+const ssoID           = require('../database/ssoid.schema');
 const fs              = require('fs');
 const GoogleStrategy  = require('passport-google-oauth20').Strategy;
 const passport        = require('passport');
@@ -17,17 +18,31 @@ passport.use(new GoogleStrategy({
     callbackURL: "http://localhost:3000/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, cb) {
-    console.log(profile);
-    User.findOrCreate({ email: "Set Later", firstName: profile.name.givenName, lastName: profile.name.familyName, password: "setLater", googleId: profile.id }, function (err, user) {
-      return cb(err, user);
+    ssoID.findOne( { ssoID: { google: profile._json.id } } ).then(res => {
+      if (res) {
+        return cb(null, res);
+      } else {
+        var u = new ssoID({
+          firstName: profile.name.givenName,
+          lastName: profile.name.familyName,
+          ssoID: { google: profile.id }
+        });
+        u.save().then(res => {
+          return cb(null, res);
+        }).catch(err => {
+
+        })
+      }
+    }).catch(err => {
+
     });
   }
 ));
 
 router.get('/', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-router.get('/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
-  res.redirect('/');
+router.get('/callback', passport.authenticate('google', { failureRedirect: 'http://localhost:8080/login' }), (req, res) => {
+  res.redirect('http://localhost:8080/profile');
 })
 
 module.exports = router;

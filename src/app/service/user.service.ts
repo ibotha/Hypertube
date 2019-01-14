@@ -10,6 +10,10 @@ export class UserService {
 
   }
 
+  getUser() {
+    return this.httpclient.get<{message: any}>('http://localhost:3000/user/currUser',  { withCredentials: true });
+  }
+
   addUser(user: FormGroup) {
     this.httpclient.post<{message: string}>('http://localhost:3000/user/create', user.value).subscribe(responsedata => {
       console.log(responsedata);
