@@ -15,9 +15,11 @@ passport.use(new FortyTwoStrategy({
   callbackURL: "http://localhost:3000/auth/42/callback"
 },
 function(accessToken, refreshToken, profile, cb) {
-  User.findOrCreate({ fortytwoId: profile.id }, function (err, user) {
-    return cb(err, user);
-  });
+  console.log(profile);
+  //User.findOrCreate({ fortytwoId: profile.id }, function (err, user) {
+  //  return cb(err, user);
+  //});
+
 }
 ));
 

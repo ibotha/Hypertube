@@ -16,9 +16,10 @@ passport.use(new FacebookStrategy({
 },
 function(accessToken, refreshToken, profile, cb) {
     console.log(profile);
-    User.findOrCreate({ email: "Set Later", firstName: profile.name.givenName, lastName: profile.name.familyName, password: "setLater",  facebookId: profile.id }, function (err, user) {
-      return cb(err, user);
-    });
+    return cb(err, null);
+    //User.findOrCreate({ email: "Set Later", firstName: profile.name.givenName, lastName: profile.name.familyName, password: "setLater",  facebookId: profile.id }, function (err, user) {
+    //  return cb(err, user);
+    //});
   }
 ));
 

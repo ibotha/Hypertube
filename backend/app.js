@@ -28,6 +28,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+ // where is this user.id going? Are we supposed to access this anywhere?
+});
+
+// used to deserialize the user
+passport.deserializeUser(function(id, done) {
+  User.findOne({id : { ssoID: { $in: id } } }, (err, user) => {
+    done(err, user);
+  });
+});
+
 app.use(session({ secret: "American Pie: Beta House", saveUninitialized: false, resave: false }));
 
 app.use((req, res, next) => {
@@ -62,19 +75,6 @@ app.post('*', function(req, res, next) {
 app.get('*', function(req, res, next) {
 	//Technically a 404
 	res.end('{"Msg":"404"}');
-});
-
-const test = require('./functions/fetchJsonYTS');
-test.getList(2, cb => {
-	//const data = JSON.parse(cb);
-	const data = JSON.parse(cb).data.movies;
-	data.forEach(result => {
-		console.log(result);
-	})
-});
-
-test.getUpcoming(cb => {
-	//console.log(cb);
 });
 
 module.exports = app;
