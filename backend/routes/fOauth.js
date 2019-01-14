@@ -39,8 +39,8 @@ passport.use(new FacebookStrategy({
 
 router.get('/', passport.authenticate('facebook', { scope: ['email'] }));
 
-router.get('/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), (req, res) => {
-  res.redirect('/');
+router.get('/callback', passport.authenticate('facebook', { failureRedirect: 'http://localhost:8080/login' }), (req, res) => {
+  res.redirect('http://localhost:8080/profile');
 })
 
 module.exports = router;

@@ -41,8 +41,8 @@ passport.use(new GoogleStrategy({
 
 router.get('/', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-router.get('/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
-  res.redirect('/');
+router.get('/callback', passport.authenticate('google', { failureRedirect: 'http://localhost:8080/login' }), (req, res) => {
+  res.redirect('http://localhost:8080/profile');
 })
 
 module.exports = router;

@@ -1,4 +1,7 @@
 <mat-card class="profile-container">
+  <h1>
+    {{ parsed['user'] }}
+  </h1>
   <h1
   *ngIf="!links['42'] && !links.Facebook && !links.Google && !links.Local && !links.Twitter"
   >Link Accounts</h1>

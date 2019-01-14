@@ -19,13 +19,16 @@ export class ProfileComponent  implements OnInit {
             'Google': false,
             'Local': false
           };
-
+  parsed = '';
   constructor(private userService: UserService) {
 
   }
 
   ngOnInit() {
-    console.log(this.userService.getUser());
+    this.userService.getUser().subscribe(res => {
+      console.log(res['passport']);
+      this.parsed = res['passport'];
+    });
   }
 
 }

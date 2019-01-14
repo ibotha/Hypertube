@@ -40,10 +40,10 @@ function(token, tokenSecret, profile, cb) {
 router.get('/', passport.authenticate('twitter'));
 
 router.get('/callback',
-  passport.authenticate('twitter', { failureRedirect: '/login' }),
+  passport.authenticate('twitter', { failureRedirect: 'http://localhost:8080/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/');
+    res.redirect('http://localhost:8080/profile');
 });
 
 module.exports = router;
