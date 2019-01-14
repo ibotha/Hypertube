@@ -44,4 +44,22 @@ router.post('/login', function(req, res, next) {
   });
 });
 
+router.get('/currUser', (req, res) => {
+  res.status(200).json(req.session != null ? req.session : {});
+})
+
+router.get('/', (req, res) => {
+  if (req.session)
+  {
+    console.log(req.session);
+  }
+  res.end();
+})
+
+router.get('/logout', (req, res) => {
+  req.session.destroy();
+  req.logout();
+  res.redirect('http://localhost:8080');
+})
+
 module.exports = router;
