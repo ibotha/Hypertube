@@ -2,6 +2,7 @@ const express		      = require('express');
 const router		      = express.Router();
 const bcrypt          = require('bcrypt');
 const User            = require('../database/user.schema');
+const ssoID           = require('../database/ssoid.schema');
 const FacebookStrategy  = require('passport-facebook').Strategy;
 const passport        = require('passport');
 const facebookcred    = require('../credentials/facebook-cred.json');
@@ -14,12 +15,24 @@ passport.use(new FacebookStrategy({
   clientSecret: FACEBOOK_APP_SECRET,
   callbackURL: "http://localhost:3000/auth/facebook/callback"
 },
-function(accessToken, refreshToken, profile, cb) {
-    console.log(profile);
-    return cb(err, null);
-    //User.findOrCreate({ email: "Set Later", firstName: profile.name.givenName, lastName: profile.name.familyName, password: "setLater",  facebookId: profile.id }, function (err, user) {
-    //  return cb(err, user);
-    //});
+  function(accessToken, refreshToken, profile, cb) {
+    ssoID.findOne( { ssoID: { facebook: profile.id } } ).then(res => {
+      if (res) {
+        return cb(null, res);
+      } else {
+        var name = profile.displayName.split(' ');
+        var u = new ssoID({
+          firstName: name[0],
+          lastName: name[name.length - 1],
+          ssoID: { facebook: profile.id }
+        });
+        u.save().then(res => {
+          return cb(null, res);
+        }).catch(err => {
+
+        })
+      }
+    }).catch(err => {});
   }
 ));
 

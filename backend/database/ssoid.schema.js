@@ -7,8 +7,8 @@ const ssoidSchema = mongoose.Schema({
   ssoID: {  google: { type: String },
             facebook: { type: String },
             42: { type: String },
-            twiiter: { type: String },
-            local: { type: String} }
+            twitter: { type: String },
+            local: { type: String } }
 })
 
 ssoidSchema.plugin(findOrCreate);

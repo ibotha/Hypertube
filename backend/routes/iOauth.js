@@ -16,14 +16,20 @@ passport.use(new FortyTwoStrategy({
   callbackURL: "http://localhost:3000/auth/42/callback"
 },
 function(accessToken, refreshToken, profile, cb) {
-  /*ssoID.findOrCreate( { ssoID: { 42: profile._json.id} }, function (err, user) {
-    return cb(err, user);
-  });*/
-  ssoID.findOne( { ssoID: { 42: profile._json.id } } ).then(res => {
+  ssoID.findOne( { ssoID: { 42: profile._json.id.toString() } } ).then(res => {
     if (res) {
       return cb(null, res);
     } else {
+      var u = new ssoID({
+        firstName: profile._json.first_name,
+        lastName: profile._json.last_name,
+        ssoID: { 42: profile._json.id.toString() }
+      });
+      u.save().then(res => {
+        return cb(null, res);
+      }).catch(err => {
 
+      })
     }
   }).catch(err => {
 
