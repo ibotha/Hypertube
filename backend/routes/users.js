@@ -49,13 +49,15 @@ router.post('/login', function(req, res, next) {
 });
 
 router.get('/currUser', (req, res) => {
+  console.log(req.session)
   res.status(200).json(req.session != null ? req.session : {});
 })
 
 router.get('/getCurr', (req, res) => {
-  res.status(200).json(
-    req.session.passport
-  )
+  console.log(req.session.passport)
+  res.status(200).json({
+    id: req.session.passport
+  })
 })
 
 router.get('/', (req, res) => {

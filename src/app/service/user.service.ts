@@ -11,7 +11,7 @@ export class UserService {
   }
 
   getUser() {
-    this.httpclient.get<{message: string}>('http://localhost:3000/user/getCurr').subscribe(responsedata => {
+    this.httpclient.get<{message: any}>('http://localhost:3000/user/currUser').subscribe(responsedata => {
       return responsedata;
     });
   }
