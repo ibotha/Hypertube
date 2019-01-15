@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../modals/user.modal';
-import { Router } from '@angular/router';
+import { Login } from '../modals/login.modal';
+import { Router, NavigationExtras } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 
 @Injectable({providedIn: 'root'})
@@ -22,10 +22,15 @@ export class UserService {
     });
   }
 
-  loginUser(user: FormData) {
-    this.httpclient.post<any>('http://localhost:3000/user/login', user, { withCredentials: true }).subscribe(responsedata => {
-      console.log(responsedata);
-      responsedata['message'] === true ? this.router.navigate(['/profile']) : this.router.navigate(['/login']);
+  loginUser(user: Login) {
+    const url = 'http://localhost:3000/user/login?username=' + user.email + '&password=' + user.password;
+    this.httpclient.get<{message: any}>(url, { withCredentials: true }).subscribe(responsedata => {
+      const extras: NavigationExtras = {
+        queryParams: {
+          'msg': 'WHERE IS THE LAMB SAUCE - Gordam Ransay'
+        }
+      };
+      responsedata['msg'] === 'OK' ? this.router.navigate(['/profile']) : this.router.navigate(['/login'], extras);
     });
   }
 }

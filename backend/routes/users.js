@@ -7,11 +7,10 @@ const LocalStrategy = require('passport-local').Strategy;
 const passport      = require('passport');
 
 passport.use(new LocalStrategy({
-    usernameField: 'email',
+    usernameField: 'username',
     passwordField: 'password'
   },
   function(email, password, done) {
-    console.log("Is this even being caled?");
     User.findOne({ email: email }, function (err, user) {
       if (err) { return done(err); }
       if (!user) { return done(null, false); }
@@ -67,12 +66,10 @@ router.post('/login', passport.authenticate('local', {failureRedirect:  'http://
 */
 
 
-router.post('/login',
-  passport.authenticate('local',),
+router.get('/login',
+  passport.authenticate('local', { failureRedirect: '/user/fail'}),
   function(req, res) {
-    console.log("Is this even being caled?#2");
-    res.status(200).jsonp({"msg":"OK"});
-    //res.redirect('http://localhost:8080/profile');
+    res.status(201).jsonp({"msg": "OK"})
 });
 
 router.get('/currUser', (req, res) => {
@@ -84,9 +81,13 @@ router.get('/getCurr', (req, res) => {
   res.status(200).json({
     id: req.session.passport
   })
+});
+
+router.get('/fail', (req, res) => {
+  res.status(201).jsonp({"msg": "NOPE"});
 })
 
-router.get('/', passport.authenticate('local', { failureRedirect: "http://localhost:8080/login"}));
+router.get('/', passport.authenticate('local', { failureRedirect: '/user/fail'}));
 
 router.get('/logout', (req, res) => {
   req.session.destroy();

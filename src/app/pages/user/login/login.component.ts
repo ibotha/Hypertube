@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from 'src/app/service/user.service';
+import { Login } from 'src/app/modals/login.modal';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -13,15 +15,17 @@ export class LoginComponent implements OnInit {
 
   pattern = /^(?=.*\d)(?=.*[^a-zA-Z\d])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
   loginform: FormGroup;
-
-  constructor(private userService: UserService) {
+  msg = '';
+  constructor(private userService: UserService, private router: Router, private route: ActivatedRoute) {
 
   }
 
     onSubmit() {
-      const npost = new FormData();
-      npost.append('email', this.loginform.value.email);
-      npost.append('password', this.loginform.value.password);
+      const lU: Login = {
+        email: this.loginform.value.email,
+        password: this.loginform.value.password
+      };
+      this.userService.loginUser(lU);
     }
 
     ngOnInit() {
@@ -29,6 +33,8 @@ export class LoginComponent implements OnInit {
         'email': new FormControl(null, { validators: [Validators.required, Validators.email] } ),
         'password': new FormControl(null, { validators: [Validators.required, Validators.pattern(this.pattern)]})
       });
+      this.route.queryParams.subscribe(res => {
+        this.msg = res['msg'];
+      });
     }
-
   }

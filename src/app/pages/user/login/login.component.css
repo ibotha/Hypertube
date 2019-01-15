@@ -79,3 +79,8 @@ mat-error {
 .login-button-div > button {
   width: 100%;
 }
+
+.error {
+  text-align: center;
+  color: rgba(217, 69, 61) !important;
+}
