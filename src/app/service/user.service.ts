@@ -16,8 +16,7 @@ export class UserService {
 
   addUser(user: FormGroup) {
     this.httpclient.post<{message: string}>('http://localhost:3000/user/create', user.value, { withCredentials: true } )
-    .subscribe(responsedata => {
-      console.log(responsedata);
+    .subscribe(() => {
       this.router.navigate(['/signup']);
     });
   }
