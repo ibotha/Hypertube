@@ -1,10 +1,15 @@
 const http = require('https');
 
-function getList(limit ,cb) {
+function getList(limit, options ,cb) {
     if (!limit || limit < 1)
         limit = 1;
     let DATA = "";
-    http.get('https://yts.am/api/v2/list_movies.jsonp?limit=' + limit, res => {
+    let query = "?";
+    switch (options) {
+      case 'limit':
+        query += 'limit=' + limit;
+    }
+    http.get('https://yts.am/api/v2/list_movies.jsonp' + query, res => {
         res.setEncoding('utf8');
         res.on('data', (chunk) => {
             DATA += chunk;

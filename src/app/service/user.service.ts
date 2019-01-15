@@ -15,16 +15,17 @@ export class UserService {
   }
 
   addUser(user: FormGroup) {
-    this.httpclient.post<{message: string}>('http://localhost:3000/user/create', user.value).subscribe(responsedata => {
+    this.httpclient.post<{message: string}>('http://localhost:3000/user/create', user.value, { withCredentials: true } )
+    .subscribe(responsedata => {
       console.log(responsedata);
       this.router.navigate(['/signup']);
     });
   }
 
-  loginUser(user: FormGroup) {
-    this.httpclient.post<{message: string}>('http://localhost:3000/user/login', user.value).subscribe(responsedata => {
+  loginUser(user: FormData) {
+    this.httpclient.post<any>('http://localhost:3000/user/login', user, { withCredentials: true }).subscribe(responsedata => {
       console.log(responsedata);
-      this.router.navigate(['/login']);
+      responsedata['message'] === true ? this.router.navigate(['/profile']) : this.router.navigate(['/login']);
     });
   }
 }

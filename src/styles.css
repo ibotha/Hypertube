@@ -6,16 +6,27 @@
 }
 
 body {
-  margin: 0;
+  margin: 0 0 70px 0;
   background-color: rgb(35, 35, 35) !important;
   color: whitesmoke;
 }
 
 footer {
-  font-size: 1.5vh;
+  font-size: 12px;
   position: fixed;
   bottom: 0 !important;
   width: 100%;
   text-align: center;
-  height: 60px !important;
+  height: 30px;
+  background-color: rgb(50, 50, 50);
+  box-shadow: 0px -5px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+}
+
+mat-card {
+  width: 90%;
+  max-width: 300px;
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
