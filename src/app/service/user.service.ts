@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Login } from '../modals/login.modal';
 import { Router, NavigationExtras } from '@angular/router';
 import { FormGroup } from '@angular/forms';
+import { User } from '../modals/user.modal';
 
 @Injectable({providedIn: 'root'})
 export class UserService {
@@ -14,15 +14,20 @@ export class UserService {
     return this.httpclient.get<{message: any}>('http://localhost:3000/user/currUser',  { withCredentials: true });
   }
 
+  getUserById(id: String) {
+    return this.httpclient.get<{message: any}>('https://localhost:3000/user/getUser', { withCredentials: true });
+  }
+
   addUser(user: FormGroup) {
     this.httpclient.post<{message: string}>('http://localhost:3000/user/create', user.value, { withCredentials: true } )
     .subscribe(() => {
-      this.router.navigate(['/signup']);
+      this.router.navigate(['/login']);
     });
   }
 
-  loginUser(user: Login) {
-    const url = 'http://localhost:3000/user/login?username=' + user.email + '&password=' + user.password;
+  loginUser(user: User) {
+    const url = 'http://localhost:3000/user/login?username=' + user.email + '&password=' + user.password + '&firstname='
+      + user.firstname + '&lastname=' + user.lastname;
     this.httpclient.get<{message: any}>(url, { withCredentials: true }).subscribe(responsedata => {
       const extras: NavigationExtras = {
         queryParams: {

@@ -24,6 +24,8 @@ import { SignupComponent } from './pages/user/signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JohnTravoltaComponent } from './pages/404/johnTravolta.component';
 import { ProfileComponent } from './pages/user/profile/profile.component';
+import { ViewProfileComponent } from './pages/user/viewprofile/viewprofile.component';
+import { DisplayListComponent } from './pages/displaylist/displaylist.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { ProfileComponent } from './pages/user/profile/profile.component';
     LoginComponent,
     SignupComponent,
     JohnTravoltaComponent,
-    ProfileComponent
+    ProfileComponent,
+    ViewProfileComponent,
+    DisplayListComponent
   ],
   imports: [
     BrowserModule,

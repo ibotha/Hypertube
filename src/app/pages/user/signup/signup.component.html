@@ -1,5 +1,14 @@
 <mat-card class="signup-container">
   <form (submit)="onSubmit()" [formGroup]="signup" class="signup-container">
+      <mat-form-field>
+          <input
+            matInput
+            name='username'
+            type='text'
+            formControlName='username'
+            placeholder="Username">
+            <mat-error *ngIf="signup.get('username').invalid">Needs to be min 3, max 150 characters</mat-error>
+        </mat-form-field>
     <mat-form-field>
       <input
         matInput

@@ -4,6 +4,7 @@ const app = express();
 const session = require('express-session');
 const mongoose = require('mongoose');
 const cors     = require('cors');
+const passport = require('passport');
 
 //Routes const
 const generalRoutes = require('./routes/general');
@@ -12,7 +13,7 @@ const googleRoute = require('./routes/gOauth');
 const facebookRoute = require('./routes/fOauth');
 const intraRoute = require('./routes/iOauth');
 const twitterRoute = require('./routes/tOauth');
-const passport = require('passport');
+const torrentRoute = require('./routes/torrentRoute');
 
 const url = 'mongodb://localhost:27017/Hypertube';
 
@@ -68,6 +69,7 @@ app.use("/auth/google/", googleRoute);
 app.use("/auth/facebook/", facebookRoute);
 app.use("/auth/42/", intraRoute);
 app.use("/auth/twitter/", twitterRoute);
+app.use("/torrent/", torrentRoute);
 
 app.post('*', function(req, res, next) {
 	//Technically a 404

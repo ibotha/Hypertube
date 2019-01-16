@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { User } from '../../../modals/user.modal';
 import { UserService } from '../../../service/user.service';
 
 
@@ -27,18 +26,13 @@ constructor (private userService: UserService) {
       return ;
     }
     this.loading = true;
-    const user: User = {
-      firstname: this.signup.value.firstname,
-      lastname: this.signup.value.lastname,
-      email: this.signup.value.email,
-      password: this.signup.value.password
-    };
     this.userService.addUser(this.signup);
     // this.signup.reset();
   }
 
   ngOnInit() {
     this.signup = new FormGroup({
+      'username': new FormControl(null, { validators: [Validators.required, Validators.minLength(3), Validators.maxLength(150)]}),
       'firstname': new FormControl(null, { validators: [Validators.required, Validators.minLength(3), Validators.maxLength(150)] }),
       'lastname': new FormControl(null, { validators: [Validators.required, Validators.minLength(3), Validators.maxLength(150)] }),
       'email': new FormControl(null, { validators: [Validators.required, Validators.email] } ),
