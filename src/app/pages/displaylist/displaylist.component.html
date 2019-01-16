@@ -1,7 +1,4 @@
 <mat-spinner *ngIf='loading'></mat-spinner>
-<h1 *ngIf="!loading"> Who broke it</h1>
-<div ngIf="!loading">
-  <p *ngFor="let p of info">
-    {{ p }}
-  </p>
+<div *ngIf="!loading">
+  <p>{{ info[0] }}</p>
 </div>

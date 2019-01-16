@@ -23,8 +23,5 @@ export class HeaderComponent implements OnInit {
         this.parsed = res['passport'];
       });
     });
-    if (!this.parsed) {
-      this.router.navigate(['/']);
-    }
   }
 }

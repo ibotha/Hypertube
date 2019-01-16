@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TorrentService } from 'src/app/service/torrent.service';
+import { Torrent } from 'src/app/modals/torrent.modal';
 
 @Component ({
   selector: 'app-display-list',
@@ -9,16 +10,15 @@ import { TorrentService } from 'src/app/service/torrent.service';
 
 
 export class DisplayListComponent implements OnInit {
-  info = [];
   loading: Boolean = true;
+  info = [];
   constructor(private torrentService: TorrentService) {
 
   }
 
   ngOnInit() {
-    this.torrentService.getTorrentList().subscribe(res => {
+    this.torrentService.getTorrentList(1).subscribe(res => {
       this.info[0] = res;
-      console.log(this.info);
       this.loading = false;
     });
   }
