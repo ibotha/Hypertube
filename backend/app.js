@@ -14,6 +14,7 @@ const facebookRoute = require('./routes/fOauth');
 const intraRoute = require('./routes/iOauth');
 const twitterRoute = require('./routes/tOauth');
 const torrentRoute = require('./routes/torrentRoute');
+const video					= require('./routes/video');
 
 const url = 'mongodb://localhost:27017/Hypertube';
 
@@ -70,6 +71,7 @@ app.use("/auth/facebook/", facebookRoute);
 app.use("/auth/42/", intraRoute);
 app.use("/auth/twitter/", twitterRoute);
 app.use("/torrent/", torrentRoute);
+app.use("/mediaAPI/", video);
 
 app.post('*', function(req, res, next) {
 	//Technically a 404
