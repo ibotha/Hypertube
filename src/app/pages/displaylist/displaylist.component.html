@@ -6,7 +6,10 @@
     <img src="{{ p['large_cover_image'] }}" style="width: 20%; height: auto">
 
     <div *ngFor="let o of p['torrents']">
-      <a href="{{ o['url'] }}">{{ o['url'] }}: Quality: {{ o['quality'] }}</a>
+      <p>Quality: {{ o['quality'] }}</p>
+      <p>Hash:: {{ o['hash'] }}</p>
+      <p>{{ o['size'] }} </p>
+      <a href="{{ o['url'] }}"><button>Download</button></a>
     </div>
     <div *ngFor="let o of p['genres']">
       {{ o }}
