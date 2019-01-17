@@ -1,20 +1,34 @@
 <mat-spinner *ngIf='loading'></mat-spinner>
 <div *ngIf="!loading">
   <div *ngFor="let p of data['data']['movies'] ">
-    <p>Title: {{ p['title'] }}</p>
-    <p>Synopsis: {{ p['synopsis'] }} </p>
-    <img src="{{ p['large_cover_image'] }}" style="width: 20%; height: auto">
-
-    <div *ngFor="let o of p['torrents']">
-      <p>Quality: {{ o['quality'] }}</p>
-      <p>Hash:: {{ o['hash'] }}</p>
-      <p>{{ o['size'] }} </p>
-      <a href="{{ o['url'] }}"><button>Download</button></a>
-    </div>
-    <div *ngFor="let o of p['genres']">
-      {{ o }}
-    </div>
-    <p> {{ p['date_uploaded'] }} </p>
-    <hr>
+    <mat-card>
+      <mat-card-title>{{ p['title'] }}</mat-card-title>
+      <mat-card-content>
+      <div class="poster">
+        <img src="{{ p['medium_cover_image'] }}" style="width: auto; height: 400px">
+      </div>
+      <div class="info">
+        <p>{{ p['synopsis'] }}</p>
+        <mat-chip-list class="grid">
+          <mat-chip class="" *ngFor="let o of p['genres']">{{ o }}</mat-chip>
+        </mat-chip-list>
+        <p> {{ p['date_uploaded'] }} </p>
+      </div>
+    </mat-card-content>
+    <mat-accordion multi='true'>
+    <mat-expansion-panel *ngFor="let o of p['torrents']">
+      <mat-expansion-panel-header>
+        {{ o['quality'] }}
+      </mat-expansion-panel-header>
+      <mat-action-row>
+        <div>
+          <p>Hash:: {{ o['hash'] }}</p>
+          <p>{{ o['size'] }} </p>
+          <a href="{{ o['url'] }}"><button>Download</button></a>
+        </div>
+      </mat-action-row>
+    </mat-expansion-panel>
+    </mat-accordion>
+    </mat-card>
   </div>
 </div>

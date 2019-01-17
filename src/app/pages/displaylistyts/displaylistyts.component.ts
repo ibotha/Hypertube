@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { TorrentService } from 'src/app/service/torrent.service';
 import { Torrent } from 'src/app/modals/torrent.modal';
+import { MatChipsModule } from '@angular/material';
+
+@NgModule({
+  imports: [MatChipsModule]
+})
 
 @Component ({
   selector: 'app-display-list-yts',

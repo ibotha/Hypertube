@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TorrentService } from 'src/app/service/torrent.service';
 import { Torrent } from 'src/app/modals/torrent.modal';
 
+
 @Component ({
   selector: 'app-display-listarchive',
   templateUrl: './displaylistarchive.component.html',

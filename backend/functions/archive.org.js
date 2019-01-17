@@ -1,10 +1,12 @@
-const archive = require('archive.org');
+const parseString = require('xml2js').parseString;
+const http        = require('https');
+const Parser      = require('rss-parser');
+const parser      = new Parser();
 
-function getArchiveList(query, cb)
+async function getArchiveList(cb)
 {
-  archive.search({q: query}, (err, res) => {
-    cb(res);
-  })
+  let feed = await parser.parseURL('https://archive.org/services/collection-rss.php?collection=moviesandfilms');
+  cb(feed);
 }
 
 module.exports = {

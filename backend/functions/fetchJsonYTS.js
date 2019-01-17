@@ -5,10 +5,7 @@ function getList(limit, options ,cb) {
         limit = 1;
     let DATA = "";
     let query = "?";
-    switch (options) {
-      case 'limit':
-        query += 'limit=' + limit;
-    }
+    query += 'limit=' + limit;
     http.get('https://yts.am/api/v2/list_movies.json' + query, res => {
         res.setEncoding('utf8');
         res.on('data', (chunk) => {

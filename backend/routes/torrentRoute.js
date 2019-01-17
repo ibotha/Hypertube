@@ -4,13 +4,13 @@ const yts       = require('../functions/fetchJsonYTS');
 const aorg      = require('../functions/archive.org');
 
 router.get('/getlist', (req, res) => {
-  yts.getList(1 ,{}, result => {
+  yts.getList(req.query.limit ,{}, result => {
     res.status(200).jsonp(result);
   });
 });
 
 router.get('/getarchive', (req, res) => {
-  aorg.getArchiveList('mediatype:(movies)', result => {
+  aorg.getArchiveList(result => {
     res.status(200).jsonp(result);
   })
 })
