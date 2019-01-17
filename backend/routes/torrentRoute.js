@@ -11,7 +11,7 @@ router.get('/getlist', (req, res) => {
 
 router.get('/getarchive', (req, res) => {
   aorg.getArchiveList('mediatype:(movies)', result => {
-    res.status(200).json(result);
+    res.status(200).jsonp(result);
   })
 })
 

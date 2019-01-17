@@ -8,7 +8,8 @@ import { SignupComponent } from './pages/user/signup/signup.component';
 import { JohnTravoltaComponent } from './pages/404/johnTravolta.component';
 import { ProfileComponent } from './pages/user/profile/profile.component';
 import { ViewProfileComponent } from './pages/user/viewprofile/viewprofile.component';
-import { DisplayListComponent } from './pages/displaylist/displaylist.component';
+import { DisplayListYTSComponent } from './pages/displaylistyts/displaylistyts.component';
+import { DisplayListArchiveComponent } from './pages/displaylistarchive/displaylistarchive.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'profile/user', component: ViewProfileComponent },
-  { path: 'list', component: DisplayListComponent},
+  { path: 'listyts', component: DisplayListYTSComponent},
+  { path: 'listarchive', component: DisplayListArchiveComponent},
   { path: '**', component: JohnTravoltaComponent }
 ];
 

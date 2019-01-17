@@ -10,7 +10,11 @@ export class TorrentService {
 
   }
 
-  getTorrentList(limit: number) {
+  getTorrentYTSList(limit: number) {
     return this.httpclient.get<{res: JSON}>('http://localhost:3000/torrent/getlist?limit=' + limit);
+  }
+
+  getTorrentARCHIVEList() {
+    return this.httpclient.get<{res: JSON}>('http://localhost:3000/torrent/getarchive');
   }
 }

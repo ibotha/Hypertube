@@ -4,6 +4,11 @@ ul {
   margin: 0;
 }
 
+ul > li {
+  padding: 5px;
+  margin: 2px;
+}
+
 ul {
   display: flex;
   flex-direction: row;

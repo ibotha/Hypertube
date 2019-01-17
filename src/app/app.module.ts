@@ -25,7 +25,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JohnTravoltaComponent } from './pages/404/johnTravolta.component';
 import { ProfileComponent } from './pages/user/profile/profile.component';
 import { ViewProfileComponent } from './pages/user/viewprofile/viewprofile.component';
-import { DisplayListComponent } from './pages/displaylist/displaylist.component';
+import { DisplayListYTSComponent } from './pages/displaylistyts/displaylistyts.component';
+import { DisplayListArchiveComponent } from './pages/displaylistarchive/displaylistarchive.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { DisplayListComponent } from './pages/displaylist/displaylist.component'
     JohnTravoltaComponent,
     ProfileComponent,
     ViewProfileComponent,
-    DisplayListComponent
+    DisplayListYTSComponent,
+    DisplayListArchiveComponent
   ],
   imports: [
     BrowserModule,
