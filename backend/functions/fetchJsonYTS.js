@@ -9,7 +9,7 @@ function getList(limit, options ,cb) {
       case 'limit':
         query += 'limit=' + limit;
     }
-    http.get('https://yts.am/api/v2/list_movies.jsonp' + query, res => {
+    http.get('https://yts.am/api/v2/list_movies.json' + query, res => {
         res.setEncoding('utf8');
         res.on('data', (chunk) => {
             DATA += chunk;

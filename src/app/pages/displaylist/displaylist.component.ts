@@ -11,14 +11,16 @@ import { Torrent } from 'src/app/modals/torrent.modal';
 
 export class DisplayListComponent implements OnInit {
   loading: Boolean = true;
-  info = [];
+  info;
+  data: JSON;
   constructor(private torrentService: TorrentService) {
 
   }
 
   ngOnInit() {
-    this.torrentService.getTorrentList(1).subscribe(res => {
-      this.info[0] = res;
+    this.torrentService.getTorrentList(5).subscribe(res => {
+      this.info = res;
+      this.data = JSON.parse(this.info);
       this.loading = false;
     });
   }

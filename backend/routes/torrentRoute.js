@@ -4,9 +4,8 @@ const yts       = require('../functions/fetchJsonYTS');
 const aorg      = require('../functions/archive.org');
 
 router.get('/getlist', (req, res) => {
-  yts.getList(req.query.limit ,{}, result => {
-    console.log(result);
-    res.status(200).json(result);
+  yts.getList(1 ,{}, result => {
+    res.status(200).jsonp(result);
   });
 });
 

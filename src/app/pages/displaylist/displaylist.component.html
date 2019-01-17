@@ -1,4 +1,17 @@
 <mat-spinner *ngIf='loading'></mat-spinner>
 <div *ngIf="!loading">
-  <p>{{ info[0] }}</p>
+  <div *ngFor="let p of data['data']['movies'] ">
+    <p>Title: {{ p['title'] }}</p>
+    <p>Synopsis: {{ p['synopsis'] }} </p>
+    <img src="{{ p['large_cover_image'] }}" style="width: 20%; height: auto">
+
+    <div *ngFor="let o of p['torrents']">
+      <a href="{{ o['url'] }}">{{ o['url'] }}: Quality: {{ o['quality'] }}</a>
+    </div>
+    <div *ngFor="let o of p['genres']">
+      {{ o }}
+    </div>
+    <p> {{ p['date_uploaded'] }} </p>
+    <hr>
+  </div>
 </div>
