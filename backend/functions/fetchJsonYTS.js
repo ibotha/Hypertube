@@ -9,6 +9,7 @@ function getList(limit, options ,cb) {
     query += '&page=' + ((limit.page) ? limit.page : 1);
     query += '&query_term=' + ((limit.query_term) ? limit.query_term : '');
     query += '&sort_by=' + ((limit.sort) ? limit.sort : 'date_added');
+    query += '&with_rt_ratings=1';
     http.get('https://yts.am/api/v2/list_movies.json' + query, res => {
         res.setEncoding('utf8');
         res.on('data', (chunk) => {
