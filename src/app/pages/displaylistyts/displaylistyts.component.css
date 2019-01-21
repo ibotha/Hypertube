@@ -2,7 +2,11 @@
 mat-card {
   background-color: rgb(60, 60, 60);
   max-width: initial;
-  color: rgb(220, 220, 220)
+  color: rgb(220, 220, 220);
+}
+
+.bad {
+  background-color: red !important;
 }
 
 mat-card-content {
@@ -20,7 +24,12 @@ mat-expansion-panel {
 
 .poster {
   border-radius: 8px;
-  height: 400px;
+  height: auto;
+  width: 25vw;
+}
+
+.poster > img {
+  width: 25vw;
 }
 
 .info > h1 {

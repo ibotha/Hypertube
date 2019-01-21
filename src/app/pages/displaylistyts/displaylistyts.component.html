@@ -20,16 +20,17 @@
 <mat-spinner *ngIf='loading'></mat-spinner>
 <div *ngIf="!loading && data['data']">
   <div class="main">
-    <mat-card *ngFor="let p of data['data']['movies'] ">
+    <mat-card *ngFor="let p of data['data']['movies']">
       <mat-card-title>{{ p['title'] }}</mat-card-title>
-      <mat-card-content>
+      <mat-card-content [class]="p['rating'] <= 4 ? 'bad' : 'good'">
       <div class="poster">
-        <img src="{{ p['medium_cover_image'] }}" style="width: auto; height: 400px">
+        <img src="{{ p['medium_cover_image'] }}">
       </div>
       <div class="info">
         <p>{{ p['synopsis'] }}</p>
         <p *ngIf="p['rating'] > 4">r8ted: {{ ((p['rating'] / 10) * 8).toFixed(1) }} / 8 For Gr8 M8</p>
         <p *ngIf="p['rating'] <= 4">r8ted: We Don't</p>
+        <p>{{ p['mpa_rating'] }}</p>
         <p>IMDB: {{ p['rating'] }} / 10</p>
         <mat-chip-list class="grid">
           <mat-chip class="" *ngFor="let o of p['genres']">{{ o }}</mat-chip>
@@ -60,5 +61,5 @@
     </mat-accordion>
     </mat-card>
   </div>
-  <mat-paginator *ngIf='totalPosts > postPerPage && query' class="page" (page)='onChanged($event)' [pageIndex]="currPage - 1" [length]="totalPosts" [pageSize]="postPerPage" [pageSizeOptions]="pageSizeOptions"></mat-paginator>
+  <mat-paginator *ngIf='totalPosts > 5 && query' class="page" (page)='onChanged($event)' [pageIndex]="currPage - 1" [length]="totalPosts" [pageSize]="postPerPage" [pageSizeOptions]="pageSizeOptions"></mat-paginator>
 </div>

@@ -77,11 +77,13 @@ export class DisplayListYTSComponent implements OnInit {
         ((this.search.value.sort) ? this.search.value.sort : 'download_count')).subscribe(res => {
         this.info = res;
         this.data = JSON.parse(this.info);
-        this.data['data']['movies'].forEach(element => {
-          if (element['yt_trailer_code']) {
-            element['yt_trailer_code'] = 'https://www.youtube.com/embed/' + element['yt_trailer_code'];
-          }
-        });
+        if (this.data['data']['movies']) {
+          this.data['data']['movies'].forEach(element => {
+            if (element['yt_trailer_code']) {
+              element['yt_trailer_code'] = 'https://www.youtube.com/embed/' + element['yt_trailer_code'];
+            }
+          });
+        }
         this.loading = false;
         this.totalPosts = this.data['data']['movie_count'];
       });
