@@ -32,8 +32,10 @@ export class DisplayListYTSComponent implements OnInit {
   }
 
   onSubmit() {
-    this.loading = true;
-    this.router.navigate(['/listyts'], { queryParams: { query: this.search.value.query_term } });
+    if (this.query !== this.search.value.query_term) {
+      this.loading = true;
+      this.router.navigate(['/listyts'], { queryParams: { query: this.search.value.query_term } });
+    }
   }
 
   onChanged(pageData: PageEvent) {
@@ -58,7 +60,7 @@ export class DisplayListYTSComponent implements OnInit {
     });
     this.route.queryParams.subscribe(query_term => {
       this.query = query_term['query'];
-      this.torrentService.getTorrentYTSList(5, 1, this.query, 'download_count').subscribe(res => {
+      this.torrentService.getTorrentYTSList(5, 1, (this.query) ? this.query : '', 'download_count').subscribe(res => {
         this.info = res;
         this.data = JSON.parse(this.info);
         this.loading = false;

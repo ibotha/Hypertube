@@ -3,6 +3,13 @@
     <mat-form-field class="example-full-width">
       <input matInput formControlName='query_term' placeholder="Search Term" value="{{search.value.query_term}}">
     </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Sort By">
+          <mat-option *ngFor="let sort of sortBy" [value]="sort">
+            {{ sort }}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
     <button
     class="search-btn"
     color="primary"
@@ -21,7 +28,7 @@
       </div>
       <div class="info">
         <p>{{ p['synopsis'] }}</p>
-        <p *ngIf="p['rating'] > 4">r8ted: {{ (p['rating'] / 10) * 8 }} / 8 For Gr8 M8</p>
+        <p *ngIf="p['rating'] > 4">r8ted: {{ ((p['rating'] / 10) * 8).toFixed(1) }} / 8 For Gr8 M8</p>
         <p *ngIf="p['rating'] <= 4">r8ted: We Don't</p>
         <p>IMDB: {{ p['rating'] }} / 10</p>
         <mat-chip-list class="grid">
@@ -47,5 +54,5 @@
     </mat-accordion>
     </mat-card>
   </div>
-  <mat-paginator *ngIf='totalPosts > postPerPage && query.length > 0' class="page" (page)='onChanged($event)' [pageIndex]="currPage - 1" [length]="totalPosts" [pageSize]="postPerPage" [pageSizeOptions]="pageSizeOptions"></mat-paginator>
+  <mat-paginator *ngIf='totalPosts > postPerPage && query' class="page" (page)='onChanged($event)' [pageIndex]="currPage - 1" [length]="totalPosts" [pageSize]="postPerPage" [pageSizeOptions]="pageSizeOptions"></mat-paginator>
 </div>
