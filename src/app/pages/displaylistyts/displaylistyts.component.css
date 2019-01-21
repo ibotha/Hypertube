@@ -55,3 +55,18 @@ mat-expansion-panel {
 .download-list {
   display: block;
 }
+
+.example-full-width {
+  margin: 0 10px;
+}
+
+.page {
+  position: fixed;
+  bottom: 50px;
+  width: 100%;
+}
+
+.main
+{
+  margin-bottom: 140px;
+}

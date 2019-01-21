@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { DynamicScriptLoaderService } from '../../service/jsLoader.service';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-footer',
@@ -6,6 +9,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./footer.component.css']
 })
 
-export class FooterComponent {
+export class FooterComponent implements OnInit {
   copyright = 'iBotha, jDorner, jWolf, mMacdona';
+
+  constructor(private jsLoader: DynamicScriptLoaderService) {
+
+  }
+
+  ngOnInit() {
+    this.jsLoader.load('googlestuff', 'loadstuff').then(dat => {}).catch(err => {});
+  }
 }
