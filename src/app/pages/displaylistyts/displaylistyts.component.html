@@ -1,7 +1,7 @@
 <mat-card class="">
   <form (submit)='onSubmit()' [formGroup]='search' class="searchTerm">
     <mat-form-field class="example-full-width">
-      <input matInput formControlName='query_term' placeholder="Search Term" value="{{search.value.query_term}}">
+      <input matInput formControlName='query_term' placeholder="Search Term" value="{{query}}">
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <mat-select formControlName='sort' placeholder="Sort By">
