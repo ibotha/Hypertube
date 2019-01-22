@@ -13,7 +13,7 @@ function getList(limit, options ,cb) {
     query += '&query_term=' + ((limit.query_term && limit.query_term !== undefined && limit.query_term !== 'undefined') ? limit.query_term : '');
     query += '&sort_by=' + ((limit.sort && limit.sort !== null && limit.sort !== 'null') ? limit.sort : 'date_added');
     console.log(query);
-    http.get('https://yts.am/api/v2/list_movies.json' + query, res => {
+    http.get('https://yts.am/api/v2/list_movies.jsonp' + query, res => {
         res.setEncoding('utf8');
         res.on('data', (chunk) => {
             DATA += chunk;

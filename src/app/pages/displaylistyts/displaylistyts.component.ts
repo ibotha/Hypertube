@@ -60,6 +60,7 @@ export class DisplayListYTSComponent implements OnInit {
         this.loading = true;
         this.torrentService.getTorrentYTSList(this.postPerPage, this.currPage, this.query, this.search.value.sort).subscribe(res => {
           this.info = res;
+          console.log(this.info);
           if (this.info === JSON) {
             this.data = JSON.parse(this.info);
             if (this.data['data']['movies']) {
