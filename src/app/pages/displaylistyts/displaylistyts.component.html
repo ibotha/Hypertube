@@ -10,15 +10,30 @@
           </mat-option>
         </mat-select>
     </mat-form-field>
+
     <button
+    *ngIf='!searching'
     class="search-btn"
     color="primary"
     mat-raised-button
     >Search</button>
+
+    <button
+    *ngIf='searching'
+    class="search-btn"
+    color="primary"
+    mat-raised-button
+    disabled
+    >Search</button>
+
   </form>
 </mat-card>
 <mat-spinner *ngIf='loading'></mat-spinner>
-<div *ngIf="!loading && data['data']">
+<div class="errors">
+  <div *ngIf="!data && !loading">No Information</div>
+  <div *ngIf="unexpected">Error loading results, Please try again later, if problem persists, please contact admin</div>
+</div>
+  <div *ngIf="!loading && data['data']">
   <div class="main">
     <mat-card *ngFor="let p of data['data']['movies']">
       <mat-card-title>{{ p['title'] }}</mat-card-title>

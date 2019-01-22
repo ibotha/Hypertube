@@ -9,7 +9,8 @@ import { MatInputModule,
   MatProgressSpinnerModule,
   MatPaginatorModule,
   MatChipsModule,
-  MatSelectModule
+  MatSelectModule,
+  MatDialogModule
  } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -41,7 +42,7 @@ import { DisplayListArchiveComponent } from './pages/displaylistarchive/displayl
     ProfileComponent,
     ViewProfileComponent,
     DisplayListYTSComponent,
-    DisplayListArchiveComponent
+    DisplayListArchiveComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +53,7 @@ import { DisplayListArchiveComponent } from './pages/displaylistarchive/displayl
     MatInputModule,
     MatCardModule,
     MatChipsModule,
+    MatDialogModule,
     MatButtonModule,
     MatToolbarModule,
     MatExpansionModule,

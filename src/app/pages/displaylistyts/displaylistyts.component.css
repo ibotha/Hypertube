@@ -32,6 +32,11 @@ mat-expansion-panel {
   width: 25vw;
 }
 
+.errors {
+  color: red;
+  text-align: center;
+}
+
 .info > h1 {
   text-align: center;
   font-size: 25px;
