@@ -60,8 +60,6 @@ export class DisplayListYTSComponent implements OnInit {
         this.loading = true;
         this.torrentService.getTorrentYTSList(this.postPerPage, this.currPage, this.query, this.search.value.sort).subscribe(res => {
           this.info = res;
-          console.log(this.info);
-          if (this.info === JSON) {
             this.data = JSON.parse(this.info);
             if (this.data['data']['movies']) {
               this.data['data']['movies'].forEach(element => {
@@ -71,9 +69,9 @@ export class DisplayListYTSComponent implements OnInit {
                   console.log(element);
                 }
               });
-            }
             this.loading = false;
             this.totalPosts = this.data['data']['movie_count'];
+            this.searching = false;
           } else {
             this.unexpected = true;
             this.loading = false;
