@@ -48,6 +48,8 @@ export class DisplayListYTSComponent implements OnInit {
   }
 
   onChanged(pageData: PageEvent) {
+    this.currPage = pageData.pageIndex + 1;
+    this.postPerPage = pageData.pageSize;
     this.ft_search();
   }
 
