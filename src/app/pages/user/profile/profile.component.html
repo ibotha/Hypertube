@@ -1,5 +1,23 @@
-<mat-card class="profile-container">
-  <h1 *ngIf="parsed">
-    {{ parsed['user'] }}
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+<mat-card class="profile-container" *ngIf="parsed">
+  <h1>
+    {{ parsed['_id'] }}
   </h1>
+  <p>
+    <label class="username-label edit-label" data-toggle="tooltip" data-placement="right" title="Click here to change your Username!">{{ parsed['username']}}</label>
+    <input type="text" class="username-edit-input" style="display: none;">
+  </p>
+  <p>
+    <label class="email-label edit-label" data-toggle="tooltip" data-placement="right" title="Click here to change your email!">{{ parsed['email'] }}</label>
+    <input type="text" class="email-edit-input" style="display: none;">
+  </p>
+  <div class="">
+    <img src="https://yts.am/assets/images/movies/two_lovers_2008/medium-cover.jpg" alt="Prof Pic">
+    <div class="overlay">
+      <a class="icon" id="ProfilePicture" title="User Profile">
+        <i class="material-icons">camera</i>
+      </a>
+    </div>
+  </div>
 </mat-card>

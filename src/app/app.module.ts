@@ -10,7 +10,8 @@ import { MatInputModule,
   MatPaginatorModule,
   MatChipsModule,
   MatSelectModule,
-  MatDialogModule
+  MatDialogModule,
+  MatIconModule
  } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -59,6 +60,7 @@ import { DisplayListArchiveComponent } from './pages/displaylistarchive/displayl
     MatExpansionModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
+    MatIconModule,
     MatSelectModule,
     ReactiveFormsModule
   ],

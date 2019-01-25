@@ -15,7 +15,7 @@ export class UserService {
   }
 
   getUserById(id: String) {
-    return this.httpclient.get<{message: any}>('https://localhost:3000/user/getUser', { withCredentials: true });
+    return this.httpclient.get<{message: any}>('https://localhost:3000/user/currUser', { withCredentials: true });
   }
 
   addUser(user: FormGroup) {

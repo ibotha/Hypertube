@@ -13,7 +13,7 @@ import { DisplayListYTSComponent } from '../displaylistyts/displaylistyts.compon
 
 export class HeaderComponent implements OnInit {
   title: String = 'Hyperest of the Hypertoobes&trade;';
-  parsed: String = '';
+  parsed;
   searching: Boolean = false;
   query: String;
   search: FormGroup;
@@ -37,11 +37,11 @@ export class HeaderComponent implements OnInit {
       'query_term': new FormControl(null, {})
     });
     this.userService.getUser().subscribe(res => {
-      this.parsed = res['passport'];
+      this.parsed = res
     });
     this.router.events.subscribe(() => {
       this.userService.getUser().subscribe(res => {
-        this.parsed = res['passport'];
+        this.parsed = res;
       });
     });
   }

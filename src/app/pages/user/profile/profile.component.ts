@@ -13,20 +13,15 @@ import { UserService } from '../../../service/user.service';
 
 
 export class ProfileComponent  implements OnInit {
-  links = { 'Facebook': false,
-            'Twitter': false,
-            '42': false,
-            'Google': false,
-            'Local': false
-          };
-  parsed = '';
+  parsed;
   constructor(private userService: UserService) {
 
   }
 
   ngOnInit() {
     this.userService.getUser().subscribe(res => {
-      this.parsed = res['passport'];
+      console.log(res);
+      this.parsed = res;
     });
   }
 

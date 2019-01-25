@@ -7,7 +7,8 @@ interface Scripts {
 
 export const ScriptStore: Scripts[] = [
   { name: 'googlestuff', src: '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit' },
-  { name: 'loadstuff', src: './assets/l.js' }
+  { name: 'loadstuff', src: './assets/google_translate_element.js' },
+  { name: 'profilepicture', src: './assets/profilepic.js' }
 ];
 
 declare var document: any;

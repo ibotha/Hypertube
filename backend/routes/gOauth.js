@@ -18,14 +18,14 @@ passport.use(new GoogleStrategy({
     callbackURL: "http://localhost:3000/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, cb) {
-    ssoID.findOne( { ssoID: { google: profile._json.id } } ).then(res => {
+    ssoID.findOne( { ssoid: profile._json.id } ).then(res => {
       if (res) {
         return cb(null, res);
       } else {
         var u = new ssoID({
           firstName: profile.name.givenName,
           lastName: profile.name.familyName,
-          ssoID: { google: profile.id }
+          ssoid: profile.id
         });
         u.save().then(res => {
           return cb(null, res);

@@ -16,7 +16,7 @@ passport.use(new TwitterStrategy({
   callbackURL: "http://localhost:3000/auth/twitter/callback"
 },
 function(token, tokenSecret, profile, cb) {
-   ssoID.findOne( { ssoID: { twitter: profile.id } } ).then(res => {
+   ssoID.findOne( { ssoid: profile.id } ).then(res => {
     if (res) {
       return cb(null, res);
     } else {
@@ -24,7 +24,7 @@ function(token, tokenSecret, profile, cb) {
       var u = new ssoID({
         firstName: name[0],
         lastName: name[name.length - 1],
-        ssoID: { twitter: profile.id }
+        ssoid: profile.id
       });
       u.save().then(res => {
         return cb(null, res);
