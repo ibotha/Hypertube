@@ -1,8 +1,6 @@
 const express		      = require('express');
 const router		      = express.Router();
-const bcrypt          = require('bcrypt');
 const User            = require('../database/user.schema');
-const ssoID            = require('../database/ssoid.schema');
 const FortyTwoStrategy  = require('passport-42').Strategy;
 const passport        = require('passport');
 const FortyTwoCred    = require('../credentials/intra-cred.json');
@@ -16,14 +14,14 @@ passport.use(new FortyTwoStrategy({
   callbackURL: "http://localhost:3000/auth/42/callback"
 },
 function(accessToken, refreshToken, profile, cb) {
-  ssoID.findOne( { ssoid: profile._json.id.toString() } ).then(res => {
+  User.findOne( { ssoid: profile._json.id.toString() } ).then(res => {
     if (res) {
       return cb(null, res);
     } else {
-      var u = new ssoID({
+      var u = new User({
         firstName: profile._json.first_name,
         lastName: profile._json.last_name,
-        ssoid: profile._json.id.toString() 
+        ssoid: profile._json.id.toString()
       });
       u.save().then(res => {
         return cb(null, res);

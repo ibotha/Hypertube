@@ -1,9 +1,6 @@
 const express		      = require('express');
 const router		      = express.Router();
-const bcrypt          = require('bcrypt');
 const User            = require('../database/user.schema');
-const ssoID           = require('../database/ssoid.schema');
-const fs              = require('fs');
 const GoogleStrategy  = require('passport-google-oauth20').Strategy;
 const passport        = require('passport');
 const googleCred      = require('../credentials/google-cred.json');
@@ -18,11 +15,11 @@ passport.use(new GoogleStrategy({
     callbackURL: "http://localhost:3000/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, cb) {
-    ssoID.findOne( { ssoid: profile._json.id } ).then(res => {
+    User.findOne( { googleId: profile._json.id } ).then(res => {
       if (res) {
         return cb(null, res);
       } else {
-        var u = new ssoID({
+        var u = new User({
           firstName: profile.name.givenName,
           lastName: profile.name.familyName,
           ssoid: profile.id

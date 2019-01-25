@@ -1,11 +1,9 @@
-const express		      = require('express');
-const router		      = express.Router();
-const bcrypt          = require('bcrypt');
-const User            = require('../database/user.schema');
-const ssoID            = require('../database/ssoid.schema');
-const TwitterStrategy  = require('passport-twitter').Strategy;
-const passport        = require('passport');
-const TwitterCred     = require("../credentials/twitter-cred.json");
+const express		        = require('express');
+const router		        = express.Router();
+const User              = require('../database/user.schema');
+const TwitterStrategy   = require('passport-twitter').Strategy;
+const passport          = require('passport');
+const TwitterCred       = require("../credentials/twitter-cred.json");
 
 const TWITTER_CONSUMER_KEY = TwitterCred.TWITTER_CONSUMER_KEY;
 const TWITTER_CONSUMER_SECRET = TwitterCred.TWITTER_CONSUMER_SECRET;
@@ -16,12 +14,12 @@ passport.use(new TwitterStrategy({
   callbackURL: "http://localhost:3000/auth/twitter/callback"
 },
 function(token, tokenSecret, profile, cb) {
-   ssoID.findOne( { ssoid: profile.id } ).then(res => {
+   User.findOne( { ssoid: profile.id } ).then(res => {
     if (res) {
       return cb(null, res);
     } else {
       var name = profile._json.name.split(' ');
-      var u = new ssoID({
+      var u = new User({
         firstName: name[0],
         lastName: name[name.length - 1],
         ssoid: profile.id

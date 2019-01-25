@@ -14,34 +14,15 @@ import { DisplayListYTSComponent } from '../displaylistyts/displaylistyts.compon
 export class HeaderComponent implements OnInit {
   title: String = 'Hyperest of the Hypertoobes&trade;';
   parsed;
-  searching: Boolean = false;
-  query: String;
-  search: FormGroup;
-  constructor(private userService: UserService, private router: Router, private display: DisplayListYTSComponent) {
-  }
-
-  onSubmit() {
-    this.query = (this.search.value.query_term) ? this.search.value.query_term : '';
-    this.router.navigate(['/listyts'], { queryParams: { query: this.query } });
-    this.display.loading = true;
-    this.display.ngOnInit();
-  }
-
-
-  onYTSClick() {
-    this.searching = !this.searching;
+  preparsed;
+  constructor(private userService: UserService, private router: Router) {
   }
 
   ngOnInit() {
-    this.search = new FormGroup({
-      'query_term': new FormControl(null, {})
-    });
-    this.userService.getUser().subscribe(res => {
-      this.parsed = res
-    });
     this.router.events.subscribe(() => {
       this.userService.getUser().subscribe(res => {
-        this.parsed = res;
+        this.preparsed = res;
+        this.parsed = (this.preparsed.user) ? res : null;
       });
     });
   }

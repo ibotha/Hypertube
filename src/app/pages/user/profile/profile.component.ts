@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-
-import { User } from '../../../modals/user.modal';
 import { UserService } from '../../../service/user.service';
+import { DynamicScriptLoaderService } from 'src/app/service/jsLoader.service';
+
 
 
 @Component ({
@@ -14,7 +13,7 @@ import { UserService } from '../../../service/user.service';
 
 export class ProfileComponent  implements OnInit {
   parsed;
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private jsLoader: DynamicScriptLoaderService) {
 
   }
 
@@ -23,6 +22,7 @@ export class ProfileComponent  implements OnInit {
       console.log(res);
       this.parsed = res;
     });
+    this.jsLoader.loadScript('profilepicture');
   }
 
 }

@@ -8,7 +8,8 @@ interface Scripts {
 export const ScriptStore: Scripts[] = [
   { name: 'googlestuff', src: '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit' },
   { name: 'loadstuff', src: './assets/google_translate_element.js' },
-  { name: 'profilepicture', src: './assets/profilepic.js' }
+  { name: 'profilepicture', src: './assets/profilepic.js' },
+  { name: 'jQuery', src: 'https://code.jquery.com/jquery-3.3.1.js' }
 ];
 
 declare var document: any;
@@ -60,5 +61,4 @@ export class DynamicScriptLoaderService {
       }
     });
   }
-
 }
