@@ -19,15 +19,16 @@
           formControlName="firstname"
           placeholder="Please gives me a Ham sandwhich"
           [value]="(parsed['firstName']) ? parsed['firstName'] : ''">
-      </mat-form-field><mat-form-field >
-          <input
-            matInput
-            name="lastname"
-            type="text"
-            formControlName="lastname"
-            placeholder="Please gives me a vegan sandwhich"
-            [value]="(parsed['lastname']) ? parsed['lastname'] : ''">
-        </mat-form-field>
+      </mat-form-field>
+      <mat-form-field >
+        <input
+          matInput
+          name="lastname"
+          type="text"
+          formControlName="lastname"
+          placeholder="Please gives me a vegan sandwhich"
+          [value]="(parsed['lastName']) ? parsed['lastName'] : ''">
+      </mat-form-field>
       <mat-form-field >
         <input
           matInput

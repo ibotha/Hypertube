@@ -14,7 +14,7 @@ passport.use(new FacebookStrategy({
   callbackURL: "http://localhost:3000/auth/facebook/callback"
 },
   function(accessToken, refreshToken, profile, cb) {
-    User.findOne( { ssoid: profile.id } ).then(res => {
+    User.findOne( { ssoid: { facebook: profile.id } } ).then(res => {
       if (res) {
         return cb(null, res);
       } else {
@@ -22,7 +22,7 @@ passport.use(new FacebookStrategy({
         var u = new User({
           firstName: name[0],
           lastName: name[name.length - 1],
-          ssoid: profile.id
+          ssoid: { facebook: profile.id }
         });
         u.save().then(res => {
           return cb(null, res);

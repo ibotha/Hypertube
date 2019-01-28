@@ -15,14 +15,16 @@ passport.use(new GoogleStrategy({
     callbackURL: "http://localhost:3000/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, cb) {
-    User.findOne( { googleId: profile._json.id } ).then(res => {
+    User.findOne( { ssoid: { google : profile._json.id } } ).then(res => {
       if (res) {
         return cb(null, res);
       } else {
         var u = new User({
           firstName: profile.name.givenName,
           lastName: profile.name.familyName,
-          ssoid: profile.id
+          email: profile.emails[0]['value'],
+          username: profile.emails[0]['value'],
+          ssoid: { google: profile.id }
         });
         u.save().then(res => {
           return cb(null, res);
