@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DynamicScriptLoaderService } from 'src/app/service/jsLoader.service';
 
 @Component({
   selector: 'app-home-page',
@@ -7,5 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class HomePageComponent implements OnInit {
-  ngOnInit() {}
+
+  constructor(private jsLoader: DynamicScriptLoaderService) {}
+
+  ngOnInit() {
+    this.jsLoader.loadScript('videoerror');
+  }
 }

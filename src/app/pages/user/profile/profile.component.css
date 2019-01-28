@@ -61,12 +61,12 @@ mat-form-field {
 
 .overlay {
   position: absolute;
-  left: 100px;
-  top: 40px;
+  left: 70px;
+  top: 100px;
 }
 
 .material-icons {
-  width: 100px;
+  font-size: 200px;
 }
 
 .pic {

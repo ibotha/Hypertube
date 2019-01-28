@@ -3,7 +3,7 @@ const router		= express.Router();
 const fs        = require('fs');
 
 router.get('/video', function(req, res) {
-    const path = 'backend/assets/sample.mkv'
+    const path = 'backend/assets/sample2.mkv'
     console.log(path);
     const stat = fs.statSync(path)
     const fileSize = stat.size
@@ -20,14 +20,16 @@ router.get('/video', function(req, res) {
         'Content-Range': `bytes ${start}-${end}/${fileSize}`,
         'Accept-Ranges': 'bytes',
         'Content-Length': chunksize,
-        'Content-Type': 'video/',
+        'Content-Type': 'video/mp4',
+        'Content-Codec': 'theora, vorbis'
       }
       res.writeHead(206, head);
       file.pipe(res);
     } else {
       const head = {
         'Content-Length': fileSize,
-        'Content-Type': 'video/',
+        'Content-Type': 'video/mp4',
+        'Content-Codec': 'theora, vorbis'
       }
       res.writeHead(200, head)
       fs.createReadStream(path).pipe(res)
