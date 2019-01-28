@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
     this.router.events.subscribe(() => {
       this.userService.getUser().subscribe(res => {
         this.preparsed = res;
-        this.parsed = (this.preparsed.user) ? res : null;
+        this.parsed = (this.preparsed) ? res : null;
       });
     });
   }

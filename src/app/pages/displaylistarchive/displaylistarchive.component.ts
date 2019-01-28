@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TorrentService } from 'src/app/service/torrent.service';
-import { Torrent } from 'src/app/modals/torrent.modal';
+import { DomSanitizer } from '@angular/platform-browser';
+
 
 
 @Component ({
@@ -14,15 +15,20 @@ export class DisplayListArchiveComponent implements OnInit {
   loading: Boolean = true;
   info;
   data: JSON;
-  constructor(private torrentService: TorrentService) {
+  constructor(private torrentService: TorrentService, public domSanitizer: DomSanitizer) {
 
   }
 
   ngOnInit() {
     this.torrentService.getTorrentARCHIVEList().subscribe(res => {
-      console.log(res);
       this.info = res;
       this.data = this.info;
+      this.data['items'].forEach(element => {
+        if (element['content']) {
+          const regex = '/<+/gm';
+          element['content'] = element['content'].replace(regex, '&lt');
+        }
+      });
       this.loading = false;
     });
   }

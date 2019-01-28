@@ -1,0 +1,82 @@
+.signup-options {
+  display: flex;
+  flex-direction: row;
+}
+
+mat-form-field {
+  margin-top: 9px;
+  margin-bottom: 9px;
+}
+
+mat-error {
+  font-size: 12px;
+}
+
+.signup-container {
+  background-color: rgba(50, 50, 50, 90);
+  display: flex;
+  flex-direction: column;
+}
+
+.signup-container > * {
+  color: whitesmoke;
+  width: 100%;
+}
+
+.signup-container > * {
+  color: whitesmoke;
+  width: 100%;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: whitesmoke;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: whitesmoke;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: whitesmoke;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: whitesmoke;
+}
+
+.OmniAuths {
+  margin-bottom: 10px;
+}
+
+.OmniAuths > a {
+  margin-top: 10px;
+  width: 120px;
+  margin: 0 calc(25% - 60px);
+}
+
+.OmniAuths > .red {
+  background-color: rgb(217, 69, 61);
+}
+
+.OmniAuths > .black {
+  background-color: #00babc;
+}
+
+.OmniAuths > .blue-facebook {
+  background-color: rgb(68, 105, 176)
+}
+
+.OmniAuths > .blue-twitter {
+  background-color: rgb(42, 163, 239);
+}
+
+.login-button-div {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.login-button-div > button {
+  width: 100%;
+}
+
+.error {
+  text-align: center;
+  color: rgba(217, 69, 61) !important;
+}

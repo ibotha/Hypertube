@@ -4,7 +4,7 @@
     <mat-card>
       <mat-card-title>{{ p['title'] }}</mat-card-title>
       <mat-card-content>
-          <div [innerHTML]="p['content']">
+          <div [innerHTML]="domSanitizer.bypassSecurityTrustHtml(p['content'])">
 
           </div>
       <!--<div class="poster">

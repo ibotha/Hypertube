@@ -30,6 +30,8 @@ import { ProfileComponent } from './pages/user/profile/profile.component';
 import { ViewProfileComponent } from './pages/user/viewprofile/viewprofile.component';
 import { DisplayListYTSComponent } from './pages/displaylistyts/displaylistyts.component';
 import { DisplayListArchiveComponent } from './pages/displaylistarchive/displaylistarchive.component';
+import { VerifyComponent } from './pages/user/verify/verify.component';
+import { ForgotPasswordComponent } from './pages/user/forgotpass/forgot.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { DisplayListArchiveComponent } from './pages/displaylistarchive/displayl
     ViewProfileComponent,
     DisplayListYTSComponent,
     DisplayListArchiveComponent,
+    ForgotPasswordComponent,
+    VerifyComponent
   ],
   imports: [
     BrowserModule,

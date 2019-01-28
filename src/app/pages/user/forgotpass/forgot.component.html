@@ -1,0 +1,62 @@
+<mat-card class="signup-container">
+    <form (submit)='onSubmit()' [formGroup]="loginform" class="signup-container">
+      <mat-form-field>
+          <input
+            matInput
+            name='username'
+            type='text'
+            formControlName='username'
+            placeholder="Yousername">
+          <mat-error *ngIf="loginform.get('username').invalid">I are bee Needing valid usernames</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+          <input
+            matInput
+            name='password'
+            type='password'
+            formControlName='password'
+            placeholder="Password">
+          <mat-error *ngIf="loginform.get('password').invalid">Needs to be min 8 characters, atleast 1 Upper, 1 Lower, 1 number and 1 special character</mat-error>
+      </mat-form-field>
+      <h3 class='error' *ngIf='msg'> {{ msg }} </h3>
+      <div class="login-button-div">
+        <button
+        *ngIf="loginform.valid"
+        color="primary"
+        mat-raised-button
+        type="submit"
+        >Login</button>
+        <button
+        *ngIf="loginform.invalid"
+        color="primary"
+        mat-raised-button
+        disabled
+        >Login</button>
+      </div>
+      <!-- SSO -->
+      <div class="OmniAuths">
+        <a class="red"
+          color="primary"
+          href="http://localhost:3000/auth/google"
+          mat-raised-button
+          >Google +</a>
+        <a class="black"
+        color="primary"
+        href="http://localhost:3000/auth/42"
+        mat-raised-button
+        >Intra 42</a>
+      </div>
+      <div class="OmniAuths">
+        <a class="blue-facebook"
+          color="primary"
+          href="http://localhost:3000/auth/facebook"
+          mat-raised-button
+          >Facebook</a>
+        <a class="blue-twitter"
+        color="primary"
+        mat-raised-button
+        href="http://localhost:3000/auth/twitter"
+        >Twitter</a>
+      </div>
+    </form>
+  </mat-card>

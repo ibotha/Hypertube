@@ -1,6 +1,5 @@
+var usernameHold, emailHold, usernameEdit, emailEdit;
+
 function callLoadImage(e) {
 
-}
-document.onload = () => {
-  console.log($(document));
 }

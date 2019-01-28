@@ -17,6 +17,6 @@ export class FooterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.jsLoader.load('googlestuff', 'loadstuff', 'jQuery').then(dat => {}).catch(err => {});
+    this.jsLoader.load('googlestuff', 'loadstuff').then(dat => {}).catch(err => {});
   }
 }

@@ -1,23 +1,88 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
 <mat-card class="profile-container" *ngIf="parsed">
-  <h1>
-    {{ parsed['_id'] }}
-  </h1>
-  <p>
-    <label class="username-label edit-label" data-toggle="tooltip" data-placement="right" title="Click here to change your Username!">Username:: {{ parsed['username']}}</label>
-    <input type="text" class="username-edit-input" style="display: none;">
-  </p>
-  <p>
-    <label class="email-label edit-label" data-toggle="tooltip" data-placement="right" title="Click here to change your email!">Email:: {{ parsed['email'] }}</label>
-    <input type="text" class="email-edit-input" style="display: none;">
-  </p>
-  <div class="">
-    <img src="https://yts.am/assets/images/movies/two_lovers_2008/medium-cover.jpg" alt="Prof Pic">
-    <div class="overlay">
-      <a class="icon" id="ProfilePicture" title="User Profile">
-        <i class="material-icons">camera</i>
-      </a>
+    <div class="profilepic">
+      <div class="overlay">
+        <a class="icon" id="ProfilePicture" title="User Profile">
+          <i class="material-icons">camera</i>
+        </a>
+      </div>
+      <img src="https://yts.am/assets/images/movies/two_lovers_2008/medium-cover.jpg" alt="Prof Pic" class="pic">
     </div>
+  <div class="userinfo">
+    <form [formGroup]="userInfo" class="form">
+      <mat-form-field >
+        <input
+          matInput
+          name="firstname"
+          type="text"
+          formControlName="firstname"
+          placeholder="Please gives me a Ham sandwhich"
+          [value]="(parsed['firstName']) ? parsed['firstName'] : ''">
+      </mat-form-field><mat-form-field >
+          <input
+            matInput
+            name="lastname"
+            type="text"
+            formControlName="lastname"
+            placeholder="Please gives me a vegan sandwhich"
+            [value]="(parsed['lastname']) ? parsed['lastname'] : ''">
+        </mat-form-field>
+      <mat-form-field >
+        <input
+          matInput
+          name="username"
+          type="text"
+          formControlName="username"
+          placeholder="Please gives me a cheeseburger"
+          [value]="(parsed['username']) ? parsed['username'] : ''">
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          name="email"
+          type="email"
+          formControlGroup="email"
+          placeholder="Please gives me a milkshake"
+          [value]="(parsed['email'] && parsed['email'] != 'set later') ? parsed['email'] : ''">
+      </mat-form-field>
+    </form>
+    <button align="center"
+      class="passbtn"
+      name='ShowPassword'
+      color="primary"
+      mat-raised-button
+      type="button"
+      (click)="showPass(changePassword ? false : true)"
+    >Change Password</button>
+    <form [formGroup]='passwordInfo' *ngIf="changePassword">
+      <mat-form-field *ngIf="password">
+        <input
+          matInput
+          name='oldPassword'
+          type='password'
+          formControlGroup='oldPassword'
+          placeholder="Original Password"
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          name='newPassword'
+          type='password'
+          formControlGroup='newPassword'
+          placeholder="New Password"
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          name='confirmPassword'
+          type='password'
+          formControlGroup='confirmPassword'
+          placeholder="Confirm Password"
+        >
+      </mat-form-field>
+    </form>
   </div>
 </mat-card>
