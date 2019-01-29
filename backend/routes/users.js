@@ -87,4 +87,9 @@ router.post('/file/upload/profile', function(req, res) {
   })
 })
 
+router.get('/user/verify', function(req, res) {
+  let hash = bcrypt.hashSync('', 10);
+	var fullUrl = req.protocol + '://' + req.get('host');
+})
+
 module.exports = router;
