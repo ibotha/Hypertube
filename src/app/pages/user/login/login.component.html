@@ -7,7 +7,7 @@
             type='text'
             formControlName='username'
             placeholder="Yousername">
-          <mat-error *ngIf="loginform.get('username').invalid">I are bee Needing valid usernames</mat-error>
+          <mat-error *ngIf="loginform.get('username').invalid">I are bee Needing valid Yousernames</mat-error>
       </mat-form-field>
       <mat-form-field>
           <input
@@ -19,6 +19,7 @@
           <mat-error *ngIf="loginform.get('password').invalid">Needs to be min 8 characters, atleast 1 Upper, 1 Lower, 1 number and 1 special character</mat-error>
       </mat-form-field>
       <h3 class='error' *ngIf='msg'> {{ msg }} </h3>
+      <h3 class='primary' *ngIf='goodmsg'> {{ goodmsg }} </h3>
       <div class="login-button-div">
         <button
         *ngIf="loginform.valid"

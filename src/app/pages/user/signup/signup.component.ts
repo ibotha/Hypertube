@@ -27,7 +27,6 @@ constructor (private userService: UserService) {
     }
     this.loading = true;
     this.userService.addUser(this.signup);
-    // this.signup.reset();
   }
 
   ngOnInit() {

@@ -65,10 +65,8 @@ export class DisplayListYTSComponent implements OnInit {
             this.data = JSON.parse(this.info);
             if (this.data['data']['movies']) {
               this.data['data']['movies'].forEach(element => {
-                console.log(element);
                 if (element === 'yt_trailer_code') {
                   element = 'https://www.youtube.com/embed/' + element;
-                  console.log(element);
                 }
               });
             this.loading = false;

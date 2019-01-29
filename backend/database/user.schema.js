@@ -8,6 +8,7 @@ const userSchema = mongoose.Schema({
   username: { type: String, required: false },
   password: { type: String, required: false },
   verified: { type: Boolean, default: false },
+  verification_key: { type: String, default: "You fucked up", required: true },
   image_url: { type: String },
   ssoid: { google: { type: String },
             intra: { type: String },

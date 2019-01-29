@@ -50,7 +50,6 @@ export class ProfileComponent  implements OnInit {
 
   ngOnInit() {
     this.userService.getUser().subscribe(res => {
-      console.log(res);
       this.parsed = res;
       this.jsLoader.loadScript('profilepicture');
     });

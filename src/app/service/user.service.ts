@@ -26,8 +26,7 @@ export class UserService {
   }
 
   loginUser(user: User) {
-    const url = 'http://localhost:3000/user/login?username=' + user.email + '&password=' + user.password + '&firstname='
-      + user.firstname + '&lastname=' + user.lastname;
+    const url = 'http://localhost:3000/user/login?username=' + user.username + '&password=' + user.password;
     this.httpclient.get<{message: any}>(url, { withCredentials: true }).subscribe(responsedata => {
       const extras: NavigationExtras = {
         queryParams: {
