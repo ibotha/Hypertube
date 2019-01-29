@@ -6,6 +6,7 @@ const LocalStrategy   = require('passport-local').Strategy;
 const passport        = require('passport');
 const _mongo          = require('mongodb');
 const imagesave       = require('../functions/saveimage');
+const verify          = require('../functions/verification');
 
 passport.use(new LocalStrategy({
     usernameField: 'username',
@@ -88,8 +89,16 @@ router.post('/file/upload/profile', function(req, res) {
 })
 
 router.get('/user/verify', function(req, res) {
-  let hash = bcrypt.hashSync('', 10);
-	var fullUrl = req.protocol + '://' + req.get('host');
+  var adr = req.protocol + '://' + req.get('host') + req.url;
+	var q = url.parse(adr, true);
+	let mail = q.query.email;
+  let verifyKey = q.query.verify;
+  let type = q.query.type;
+	verify.verify(mail, type, verifyKey).then(res => {
+
+  }).catch(err => {
+
+  })
 })
 
 module.exports = router;
