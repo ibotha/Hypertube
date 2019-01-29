@@ -5,6 +5,7 @@ const User            = require('../database/user.schema');
 const LocalStrategy   = require('passport-local').Strategy;
 const passport        = require('passport');
 const _mongo          = require('mongodb');
+const imagesave       = require('../functions/saveimage');
 
 passport.use(new LocalStrategy({
     usernameField: 'username',
@@ -78,6 +79,12 @@ router.get('/logout', (req, res) => {
   req.session.destroy();
   req.logout();
   res.redirect('http://localhost:8080');
+})
+
+router.post('/file/upload/profile', function(req, res) {
+  imagesave.upload.single('profileImage')(req, res, err => {
+
+  })
 })
 
 module.exports = router;
