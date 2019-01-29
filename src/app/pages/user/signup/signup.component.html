@@ -68,11 +68,12 @@
         disabled
         >Sign Up</button>
     </div>
-    <div>
+    <div class="signup-button-div">
       <button
         *ngIf="signup.get('email').valid"
         color="primary"
         mat-raised-button
+        (click)="onResend()"
         type="button"
       >Resend Verify</button>
       <p

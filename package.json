@@ -1,6 +1,6 @@
 {
   "name": "hypertube",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "scripts": {
     "gcom": "git add . && git commit -m '$M' && git push",
     "start-test": "ng serve --port 8080 | nodemon server.js",
@@ -48,15 +48,6 @@
     "passport-twitter": "^1.0.4",
     "rss-parser": "^3.6.2",
     "rxjs": "~6.3.3",
-    "videogular": "^2.2.1",
-    "videogular-angulartics": "^1.4.4",
-    "videogular-buffering": "^1.4.4",
-    "videogular-controls": "^1.4.4",
-    "videogular-dash": "^1.4.4",
-    "videogular-ima-ads": "^1.4.4",
-    "videogular-overlay-play": "^1.4.4",
-    "videogular-poster": "^1.4.4",
-    "videogular-themes-default": "^1.4.4",
     "xml2js": "^0.4.19",
     "zone.js": "~0.8.26"
   },

@@ -42,7 +42,7 @@ router.post('/create', function(req, res, next) {
     });
     user.save().then((result) => {
       var verifykey = req.protocol + "://" + req.get('host') + "/user/verify?username=" + username + "&email=" + email + "&verification=" + verification;
-      var html = "<h1> Good day User </h1> <br><hr> <p>Verify Account please</p>" + "<a href='"+verifykey+"'><input type='button' value='verify'></a>";
+      var html = "<h1> Good day " + firstname + " </h1> <br><hr> <p>Verify Account please</p>" + "<a href='"+verifykey+"'><input type='button' value='verify'></a>";
       mail.sendMail(email, "Successful creation", "User Verification", html);
       res.status(201).json({message: "User added successfully"});
     }).catch(err => {
@@ -101,5 +101,20 @@ router.get('/verify', function(req, res) {
     res.redirect(req.protocol + "://" + req.get('host').split(":")[0] + ":8080/login?verifymsg=" + cb);
   });
 })
+
+router.post('/resendVerify', function(req, res) {
+  var email = req.body.email;
+  User.findOne({email: email}).then(user => {
+    if (user) {
+      var verifykey = req.protocol + "://" + req.get('host') + "/user/verify?username=" + user['username'] + "&email=" + user['email'] + "&verification=" + user['verification_key'];
+      var html = "<h1> Good day " + user['firstName'] + " </h1> <br><hr> <p>Verify Account please</p>" + "<a href='"+verifykey+"'><input type='button' value='verify'></a>";
+      mail.sendMail(email, "Successful creation", "User Verification", html);
+      res.status(201).json({message: "User added successfully"});
+    }else
+      res.status(201).json({message: "No User Found"});
+  }).catch(err => {
+    res.status(200).json('{"msg": err}');
+  })
+});
 
 module.exports = router;

@@ -6,8 +6,19 @@ import { User } from '../modals/user.modal';
 
 @Injectable({providedIn: 'root'})
 export class UserService {
+  error: String = '';
   constructor(private httpclient: HttpClient, private router: Router) {
 
+  }
+
+  resendVerify(email) {
+    const obj = { email: email };
+    this.httpclient.post<{message: any}>('http://localhost:3000/user/resendVerify', obj,
+      { withCredentials: true } ).subscribe(responsedata => {
+        if (responsedata['msg'] !== 'OK') {
+          this.error = responsedata['msg'];
+        }
+      });
   }
 
   getUser() {

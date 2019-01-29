@@ -30,8 +30,7 @@ import { ProfileComponent } from './pages/user/profile/profile.component';
 import { ViewProfileComponent } from './pages/user/viewprofile/viewprofile.component';
 import { DisplayListYTSComponent } from './pages/displaylistyts/displaylistyts.component';
 import { DisplayListArchiveComponent } from './pages/displaylistarchive/displaylistarchive.component';
-import { VerifyComponent } from './pages/user/verify/verify.component';
-import { ForgotPasswordComponent } from './pages/user/forgotpass/forgot.component';
+import { from } from 'rxjs';
 
 @NgModule({
   declarations: [
@@ -45,9 +44,7 @@ import { ForgotPasswordComponent } from './pages/user/forgotpass/forgot.componen
     ProfileComponent,
     ViewProfileComponent,
     DisplayListYTSComponent,
-    DisplayListArchiveComponent,
-    ForgotPasswordComponent,
-    VerifyComponent
+    DisplayListArchiveComponent
   ],
   imports: [
     BrowserModule,

@@ -11,7 +11,7 @@ function verify(username, email, verification, cb) {
     if (res)
       cb("Account Verified");
     else
-      cb("Account is not found, or you are stupid");
+      cb("Account is not found, or you are stupid, or you're already verified.");
   }).catch(err => {
     cb("well, verify failed");
   })
