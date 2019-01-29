@@ -80,6 +80,7 @@
         *ngIf="signup.get('email').invalid"
         disabled
       >To resend verification email, please fill in the email field</p>
+      <p *ngIf="msg">{{ msg }}</p>
     </div>
     <!-- SSO -->
     <div class="OmniAuths">

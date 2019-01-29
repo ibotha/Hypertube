@@ -16,14 +16,16 @@ export class SignupComponent  implements OnInit {
 pattern = /^(?=.*\d)(?=.*[^a-zA-Z\d])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 signup: FormGroup;
 loading: Boolean = false;
+msg: String = '';
 
   constructor (private userService: UserService) {
 
   }
 
   onResend(): void {
-    console.log('Hello?');
-    this.userService.resendVerify(this.signup.value.email);
+    this.userService.resendVerify(this.signup.value.email, res => {
+      this.msg = res;
+    });
   }
 
   onSubmit(): void {

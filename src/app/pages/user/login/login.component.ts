@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from 'src/app/service/user.service';
 import { User } from 'src/app/modals/user.modal';
 import { Router, ActivatedRoute } from '@angular/router';
+import { HeaderComponent } from '../../header/header.component';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   loginform: FormGroup;
   msg: String = '';
   goodmsg: String = '';
-  constructor(private userService: UserService, private router: Router, private route: ActivatedRoute) {
+  constructor(private userService: UserService, private router: Router, private route: ActivatedRoute, private head: HeaderComponent) {
 
   }
 
@@ -37,6 +38,9 @@ export class LoginComponent implements OnInit {
       'password': new FormControl(null, { validators: [Validators.required, Validators.pattern(this.pattern)]})
     });
     this.route.queryParams.subscribe(res => {
+      if (!res['msg']) {
+        this.head.checkLogin();
+      }
       this.msg = res['msg'];
       this.goodmsg = res['verifymsg'];
     });

@@ -76,7 +76,7 @@ router.get('/getCurr', (req, res) => {
 });
 
 router.get('/fail', (req, res) => {
-  res.status(201).jsonp( { "msg": "NOPE" } );
+  res.status(200).jsonp( { "msg": "NOPE" } );
 })
 
 router.get('/', passport.authenticate('local', { failureRedirect: '/user/fail'}));
@@ -109,7 +109,7 @@ router.post('/resendVerify', function(req, res) {
       var verifykey = req.protocol + "://" + req.get('host') + "/user/verify?username=" + user['username'] + "&email=" + user['email'] + "&verification=" + user['verification_key'];
       var html = "<h1> Good day " + user['firstName'] + " </h1> <br><hr> <p>Verify Account please</p>" + "<a href='"+verifykey+"'><input type='button' value='verify'></a>";
       mail.sendMail(email, "Successful creation", "User Verification", html);
-      res.status(201).json({message: "User added successfully"});
+      res.status(201).json({message: "Email sent successfully"});
     }else
       res.status(201).json({message: "No User Found"});
   }).catch(err => {
