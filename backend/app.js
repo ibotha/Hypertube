@@ -9,7 +9,6 @@ const passport = require('passport');
 //Routes const
 const generalRoutes = require('./routes/general');
 const userRoutes = require('./routes/users');
-const googleRoute = require('./routes/gOauth');
 const facebookRoute = require('./routes/fOauth');
 const intraRoute = require('./routes/iOauth');
 const twitterRoute = require('./routes/tOauth');
@@ -66,7 +65,6 @@ app.use("/", generalRoutes);
 
 //Example use for users ->
 app.use("/user/", userRoutes);
-app.use("/auth/google/", googleRoute);
 app.use("/auth/facebook/", facebookRoute);
 app.use("/auth/42/", intraRoute);
 app.use("/auth/twitter/", twitterRoute);
