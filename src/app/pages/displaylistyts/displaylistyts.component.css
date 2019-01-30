@@ -80,7 +80,12 @@ mat-expansion-panel {
   width: 100%;
 }
 
-.main
-{
-  margin-bottom: 140px;
+.all {
+  height: calc(100vh - 64px - 135px);
+  overflow-y: auto;
+}
+
+.allmore {
+  height: calc(100vh - 64px - 50px);
+  overflow-y: auto;
 }

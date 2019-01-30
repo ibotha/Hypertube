@@ -1,24 +1,29 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
 <mat-card class="profile-container" *ngIf="parsed">
     <div class="profilepic">
       <div class="overlay">
         <a class="icon" id="ProfilePicture" title="User Profile">
-          <i class="material-icons">camera</i>
+          <i class="material-icons skiptranslate">camera</i>
         </a>
       </div>
       <img src="https://yts.am/assets/images/movies/two_lovers_2008/medium-cover.jpg" alt="Prof Pic" class="pic">
     </div>
-  <div class="userinfo">
-    <form [formGroup]="userInfo" class="form">
-      <mat-form-field >
+    <div class="userinfo">
+      <form [formGroup]="userInfo" class="form">
+        <mat-form-field>
+          <input
+            matInput
+            name="email"
+            type="email"
+            formControlName="email"
+            placeholder="Please gives me a email">
+        </mat-form-field>
+        <mat-form-field >
         <input
           matInput
           name="firstname"
           type="text"
           formControlName="firstname"
-          placeholder="Please gives me a Ham sandwhich"
-          [value]="(parsed['firstName']) ? parsed['firstName'] : ''">
+          placeholder="Please gives me a Ham Firstname">
       </mat-form-field>
       <mat-form-field >
         <input
@@ -26,8 +31,7 @@
           name="lastname"
           type="text"
           formControlName="lastname"
-          placeholder="Please gives me a vegan sandwhich"
-          [value]="(parsed['lastName']) ? parsed['lastName'] : ''">
+          placeholder="Please gives me a vegan Lastname">
       </mat-form-field>
       <mat-form-field >
         <input
@@ -35,18 +39,13 @@
           name="username"
           type="text"
           formControlName="username"
-          placeholder="Please gives me a cheeseburger"
-          [value]="(parsed['username']) ? parsed['username'] : ''">
+          placeholder="Please gives me a Yousername">
       </mat-form-field>
-      <mat-form-field>
-        <input
-          matInput
-          name="email"
-          type="email"
-          formControlGroup="email"
-          placeholder="Please gives me a milkshake"
-          [value]="(parsed['email'] && parsed['email'] != 'set later') ? parsed['email'] : ''">
-      </mat-form-field>
+      <button
+        mat-raised-button
+        type="button"
+        (click)="updateUser()"
+      >Update User</button>
     </form>
     <button align="center"
       class="passbtn"

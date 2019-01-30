@@ -102,6 +102,19 @@ router.get('/verify', function(req, res) {
   });
 })
 
+router.post('/update', function(req, res) {
+  if (req.body.email && req.body.username && req.body.firstname && req.body.lastname) {
+    User.findByIdAndUpdate(req.session.passport.user, {email: req.body.email, username: req.body.username,
+    firstName: req.body.firstname, lastName: req.body.lastname}).then(() => {
+      res.status(201).json({message: "Success"});
+    }).catch(err => {
+      res.status(200).json({message: "Error has occured => " + err});
+    })
+  } else {
+    res.status(304).json({message: "Invalid Info"});
+  }
+});
+
 router.post('/resendVerify', function(req, res) {
   var email = req.body.email;
   User.findOne({email: email}).then(user => {

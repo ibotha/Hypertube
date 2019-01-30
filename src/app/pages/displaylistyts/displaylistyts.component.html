@@ -1,3 +1,4 @@
+<div class="{{ ((totalPosts > 5 && query) ? 'all' : 'allmore') + '  skiptranslate' }}">
 <mat-card class="">
   <form (submit)='onSubmit()' [formGroup]='search' class="searchTerm">
     <mat-form-field class="example-full-width">
@@ -71,4 +72,5 @@
     </mat-card>
   </div>
   <mat-paginator *ngIf='totalPosts > 5 && query' class="page" (page)='onChanged($event)' [pageIndex]="currPage - 1" [length]="totalPosts" [pageSize]="postPerPage" [pageSizeOptions]="pageSizeOptions"></mat-paginator>
+  </div>
 </div>

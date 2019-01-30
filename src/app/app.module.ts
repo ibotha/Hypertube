@@ -11,7 +11,8 @@ import { MatInputModule,
   MatChipsModule,
   MatSelectModule,
   MatDialogModule,
-  MatIconModule
+  MatIconModule,
+  MatSidenavModule
  } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -63,6 +64,7 @@ import { from } from 'rxjs';
     MatPaginatorModule,
     MatIconModule,
     MatSelectModule,
+    MatSidenavModule,
     ReactiveFormsModule
   ],
   providers: [],

@@ -37,6 +37,14 @@ export class UserService {
     });
   }
 
+  updateUser(user: FormGroup) {
+    this.httpclient.post<{message: string}>('http://localhost:3000/user/update', user.value, { withCredentials: true } )
+    .subscribe((thing) => {
+      console.log(thing);
+      this.router.navigate(['/profile']);
+    });
+  }
+
   loginUser(user: User) {
     const url = 'http://localhost:3000/user/login?username=' + user.username + '&password=' + user.password;
     this.httpclient.get<{message: any}>(url, { withCredentials: true }).subscribe(responsedata => {

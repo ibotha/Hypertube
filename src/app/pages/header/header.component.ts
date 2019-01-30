@@ -11,12 +11,14 @@ import { DisplayListYTSComponent } from '../displaylistyts/displaylistyts.compon
 })
 
 @Injectable({providedIn: 'root'})
+
 export class HeaderComponent implements OnInit {
   title: String = 'Hyperest of the Hypertoobes&trade;';
   parsed;
   preparsed;
-  constructor(private userService: UserService, private router: Router) {
-  }
+  opened: boolean;
+
+  constructor(private userService: UserService, private router: Router) {}
 
   checkLogin(): void {
     this.userService.getUser().subscribe(res => {
@@ -26,9 +28,9 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-  this.router.events.subscribe((thing) => {
+    this.router.events.subscribe((thing) => {
       if (thing instanceof NavigationEnd) {
-          this.checkLogin();
+        this.checkLogin();
       }
     });
   }
