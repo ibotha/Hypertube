@@ -1,0 +1,21 @@
+{
+  "name": "hypertube",
+  "version": "1.0.0",
+  "description": "Testing sandbox for torrenting functionality.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "nodemon": "./node_modules/nodemon/bin/nodemon.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cli-progress": "^2.1.1",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.6",
+    "mongoose-findorcreate": "^3.0.0",
+    "nodemon": "^1.18.9",
+    "rimraf": "^2.6.3",
+    "webtorrent": "^0.103.0"
+  }
+}
