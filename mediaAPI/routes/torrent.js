@@ -292,37 +292,46 @@ router.get('/stream/:movieID', (req, res) => {
                             res.writeHead(206, head);
                             stream.pipe(res);
                         }
-                    // } else {
-
-                    //     // IF REQUEST INCLUDES ALL PIECES -- WILL NOT WORK BUT IS MANDATORY FOR RANGE REQUEST ( TO INITIALISE COMMUNICATION ? )
-                    //     stream = fs.createReadStream(path, { start, end })
-                    //     res.writeHead(206, head);
-                    //     stream.pipe(res);
-                    // } 
                     
                 } else {
 
-                    // NO RANGE REQUEST
-                    const head = {
-                        'Content-Length': movieMeta.movieStats.length,
-                        'Content-Type': 'video/' + movieMeta.movieStats.type,
-                        'Content-Codec': 'theora, vorbis'
-                    }
-                    res.writeHead(200, head);
-                    stream = fs.createReadStream(path);
-                    stream.pipe(res);
+                    res.send(movieMeta);
                 }
             } else {
 
-                // FILE NOT CURRENTLY DOWNLOADING / TORRENTING
-                const head = {
-                    'Content-Length': movieMeta.movieStats.length,
-                    'Content-Type': 'video/' + movieMeta.movieStats.type,
-                    'Content-Codec': 'theora, vorbis'
+                if ( range ) {
+
+                    // DECODE RANGE REQUEST
+
+                    const parts = range.replace(/bytes=/, "").split("-")
+                    const start = parseInt(parts[0], 10)
+                    const end = parts[1]
+                        ? parseInt(parts[1], 10)
+                        : fileSize - 1
+                    const chunksize = (end - start) + 1
+
+                    // CALCULATE PIECES BASED ON RANGE REQUEST -- FOR PIECE PRIORITIZATION
+                    startPieceToGet = Math.floor((start + file.offset) / torrent.pieceLength);
+                    endPieceToGet = Math.floor((end + file.offset) / torrent.pieceLength);
+
+                    // CONSTRUCT HEADER TO BE ATTATCHED TO RESPONSE
+                    const head = {
+                        'Transfer-Encoding': 'chunked',
+                        'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+                        'Accept-Ranges': 'bytes',
+                        'Content-Length': chunksize,
+                        'Content-Type': 'video/' + movieMeta.movieStats.type,
+                        'Content-Codec': 'theora, vorbis'
+                    }
+                    stream = fs.createReadStream(path, { start, end })
+                    res.writeHead(206, head);
+                    stream.pipe(res);
+
+                }else{
+
+                    res.send(movieMeta);
+                    
                 }
-                res.writeHead(200, head);
-                stream = fs.createReadStream(path);
-                stream.pipe(res);
             }
         }
     });

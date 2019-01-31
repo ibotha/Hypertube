@@ -42,3 +42,9 @@ testem.log
 Thumbs.db
 
 backend/assets/
+
+#mediaAPI
+
+mediaAPI/data/
+mediaAPI/node_modules/
+mediaAPI/assets/
