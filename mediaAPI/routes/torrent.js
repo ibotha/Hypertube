@@ -15,7 +15,7 @@ const progress      = require('cli-progress');
 
 // REQUEST TO TORRENT FILE
 router.post('/download/', (req, res) => {
-    
+    console.log(req.body);
     // PROCESS REQUEST ( INFO HASH / MAGNET LINK / LINK TO TORRENT FILE )
     var torrentLink = req.body.torrentLink;
 
