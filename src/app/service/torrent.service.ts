@@ -9,7 +9,7 @@ export class TorrentService {
   }
 
   isDownloaded(hash: String) {
-    console.log("Searching");
+    console.log("Searching " + hash);
     return this.httpclient.get<{}>('http://localhost:3000/torrent/isAvailible/' + hash)
   }
 

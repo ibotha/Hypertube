@@ -73,9 +73,9 @@ export class DisplayListYTSComponent implements OnInit {
                 console.log(torrent);
                 torrent.forEach(tor => {
                   var x = element.id;
-                  this.torrentService.isDownloaded(tor['hash']).subscribe(isDownload => {
-                    console.log(x + " is downloaded " + isDownload);
-                  });
+                  //this.torrentService.isDownloaded(tor['hash']).subscribe(isDownload => {
+                  //  console.log(x + " is downloaded " + isDownload);
+                  //});
                 });
               });
             this.loading = false;
