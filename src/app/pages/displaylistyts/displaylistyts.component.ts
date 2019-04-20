@@ -55,6 +55,7 @@ export class DisplayListYTSComponent implements OnInit {
 
   StartDownload(val: string): void {
     this.torrentService.download(val);
+    this.router.navigate(['/'], {queryParams: {ID: val}});
   }
 
   ft_search(): void {

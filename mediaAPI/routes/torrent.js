@@ -355,7 +355,7 @@ router.delete('/delete/:movieID', (req, res) => {
 
 router.get('/isAvailible/:hash', (req, res) => {
     var id = req.params.hash;
-    var find = Movie.findOne({movieID: id});
+    var find = Movie.findOne({$or: [{movieID: id}, {infoHash: id}]});
     find.exec().then(val => {
         if (val)
             res.status(200).jsonp(val);
@@ -365,6 +365,6 @@ router.get('/isAvailible/:hash', (req, res) => {
         console.log("an error has occured " + err)
         res.status(403);
     })
-  });
+});
 
 module.exports = router;

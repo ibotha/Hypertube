@@ -15,29 +15,47 @@ import { Torrent } from 'src/app/modals/torrent.modal';
 export class HomePageComponent implements OnInit {
   downloadInfo: FormGroup;
   torId: string;
-  idAvail:  boolean = false;
+  idAvail: boolean = false;
   torrent: Torrent;
+  started: boolean = false;
+  ID: string;
 
   constructor(private jsLoader: DynamicScriptLoaderService, private route: ActivatedRoute, private torService: TorrentService) {
     this.route.queryParams.subscribe(parm => {
-      console.log(parm)
-      if (parm['ID'])
-      {
-        this.torService.isDownloaded(parm['ID']).subscribe(complete => {
-          this.idAvail = true;
-          console.log(complete);
+      this.ID = parm['ID'].toLowerCase();
+      this.searchDownload();
+    })
+  }
+
+  searchDownload()
+  {
+    if (this.ID)
+    {
+      this.torService.isDownloaded(this.ID).subscribe(complete => {
+        //console.log(complete);
+        if (complete)
+        {
           this.torrent = complete;
           if (this.torrent)
           {
-            if (this.torrent.status == "COMPLETE")
-              this.torId = "http://localhost:3001/torrent/stream/" + parm['ID']
-            else
-              this.idAvail = false;
+            if (this.torrent.status == "COMPLETE" || this.torrent.status == "READY")
+            {
+              this.idAvail = true;
+              this.torId = "http://localhost:3001/torrent/stream/" + complete.movieID
+            }
+            else if (this.torrent.status == "STARTED")
+            {
+              this.idAvail = false
+              this.started = true;
+              setInterval(() => this.searchDownload(), 100000);
             }else
               this.idAvail = false;
-        })
-      }
-    })
+          }
+          else
+            this.idAvail = false;
+        }
+      })
+    }
   }
 
   ngOnInit() {
