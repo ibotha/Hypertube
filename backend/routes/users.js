@@ -60,11 +60,15 @@ router.get('/currUser', (req, res) => {
   if (req.session.passport)
   {
     var oID =  new _mongo.ObjectID(req.session.passport.user);
-    User.findOne({_id: oID}).then(user => {
-      res.status(200).json(user);
-    }).catch(err => {
-      res.status(200).json( { 'Erorr': err } )
-    });
+    if (oID instanceof _mongo.ObjectID)
+    {
+      User.findOne({_id: oID}).then(user => {
+        res.status(200).json(user);
+      }).catch(err => {
+        res.status(200).json( { 'Erorr': err } )
+      });
+    }else
+      res.status(404);
   }else
     res.status(200).json();
 })
