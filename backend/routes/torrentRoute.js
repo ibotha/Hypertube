@@ -17,7 +17,6 @@ router.get('/isAvailible/:hash', (req, res) => {
   console.log("Start Search " + id);
   try {
     var find = Movie.findOne({movieID: id});
-    console.log("Contacting...")
     find.exec().then(val => {
       console.log("Search done");
       if (val)
