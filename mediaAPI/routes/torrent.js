@@ -298,7 +298,6 @@ router.get('/stream/:movieID', (req, res) => {
                     res.send(movieMeta);
                 }
             } else {
-
                 if ( range ) {
 
                     // DECODE RANGE REQUEST
@@ -353,5 +352,19 @@ router.delete('/delete/:movieID', (req, res) => {
         });
     })
 });
+
+router.get('/isAvailible/:hash', (req, res) => {
+    var id = req.params.hash;
+    var find = Movie.findOne({movieID: id});
+    find.exec().then(val => {
+        if (val)
+            res.status(200).jsonp(val);
+        else
+            res.status(200).jsonp(null);
+    }).catch(err => {
+        console.log("an error has occured " + err)
+        res.status(403);
+    })
+  });
 
 module.exports = router;

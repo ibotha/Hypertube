@@ -12,28 +12,6 @@ router.get('/getlist', (req, res) => {
   });
 });
 
-router.get('/isAvailible/:hash', (req, res) => {
-  var id = req.params.hash;
-  console.log("Start Search " + id);
-  try {
-    var find = Movie.findOne({movieID: id});
-    find.exec().then(val => {
-      console.log("Search done");
-      if (val)
-        res.status(200).jsonp(JSON.stringify(val));
-      else
-        res.status(200).jsonp(JSON.stringify({state: "NULL"}));
-    }).catch(err => {
-      console.log("an error has occured " + err)
-      res.status(403);
-    })
-  } catch (err)
-  {
-    console.log(err);
-    res.status(301);
-  }
-});
-
 router.get('/getarchive', (req, res) => {
   aorg.getArchiveList(result => {
     if (typeof result == 'object')

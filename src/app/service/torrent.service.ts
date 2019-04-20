@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Torrent } from '../modals/torrent.modal';
 
 @Injectable({providedIn: 'root'})
 export class TorrentService {
@@ -10,7 +11,7 @@ export class TorrentService {
 
   isDownloaded(hash: String) {
     console.log("Searching " + hash);
-    return this.httpclient.get<{}>('http://localhost:3000/torrent/isAvailible/' + hash)
+    return this.httpclient.get<Torrent>('http://localhost:3001/torrent/isAvailible/' + hash)
   }
 
   download(hash: String) {
