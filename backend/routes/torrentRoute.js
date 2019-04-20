@@ -8,31 +8,23 @@ const Movie     = require('../../mediaApi/database/movie.schema');
 
 router.get('/getlist', (req, res) => {
   yts.getList(req.query, result => {
-      _json = JSON.parse(result);
-      try {
-        for(let p of _json['data']['movies'])
-        {
-          for (let x of p['torrents'])
-          {
-            var movie = Movie.findOne({InfoHash: x['hash']})
-            movie.exec()
-            movie.then(res => {
-              if (res)
-                x['hash'] = res.status;
-              else
-                x['hash'] = "";
-              console.log(res);
-            })
-          }
-        }  
-      } catch (error) {
-        
-      }
-      finally {
-        res.status(200).jsonp(JSON.stringify(_json));
-      }
+        res.status(200).jsonp(result);
       
   });
+});
+
+router.get('/isAvailible/:hash', (req, res) => {
+  var id = req.params.hash;
+  console.log("Start Search " + id);
+  Movie.findOne({infoHash: id}).then(val => {
+    console.log("Search done");
+    if (val)
+      res.status(200).jsonp(JSON.stringify(val));
+    else
+      res.status(200).jsonp(JSON.stringify({state: "NULL"}));
+  }).catch(err => {
+    console.log("an error has occured " + err)
+  })
 });
 
 router.get('/getarchive', (req, res) => {

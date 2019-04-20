@@ -8,6 +8,11 @@ export class TorrentService {
 
   }
 
+  isDownloaded(hash: String) {
+    console.log("Searching");
+    return this.httpclient.get<{}>('http://localhost:3000/torrent/isAvailible/' + hash)
+  }
+
   download(hash: String) {
     const body = {
       torrentLink: hash

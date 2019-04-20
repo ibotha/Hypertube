@@ -53,6 +53,10 @@ export class DisplayListYTSComponent implements OnInit {
     this.ft_search();
   }
 
+  StartDownload(val: string): void {
+    this.torrentService.download(val);
+  }
+
   ft_search(): void {
     if (!this.searching) {
       this.searching = true;
@@ -65,9 +69,14 @@ export class DisplayListYTSComponent implements OnInit {
             this.data = JSON.parse(this.info);
             if (this.data['data']['movies']) {
               this.data['data']['movies'].forEach(element => {
-                if (element === 'yt_trailer_code') {
-                  element = 'https://www.youtube.com/embed/' + element;
-                }
+                const torrent = element.torrents;
+                console.log(torrent);
+                torrent.forEach(tor => {
+                  var x = element.id;
+                  this.torrentService.isDownloaded(tor['hash']).subscribe(isDownload => {
+                    console.log(x + " is downloaded " + isDownload);
+                  });
+                });
               });
             this.loading = false;
             this.totalPosts = this.data['data']['movie_count'];

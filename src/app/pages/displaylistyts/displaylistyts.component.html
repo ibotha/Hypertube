@@ -64,7 +64,7 @@
         <div>
           <p>Hash:: {{ o['hash'] }}</p>
           <p>{{ o['size'] }} </p>
-          <a href="{{ o['url'] }}"><button>Download</button></a>
+          <button (click)="StartDownload(o['hash'])">Download</button>
         </div>
       </mat-action-row>
     </mat-expansion-panel>
