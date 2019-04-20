@@ -6,6 +6,7 @@
     "start-test": "ng serve --port 8080 | nodemon server.js",
     "host": "ng serve --port 8080",
     "server": "nodemon server.js",
+    "media": "nodemon ./mediaApi/app.js",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",

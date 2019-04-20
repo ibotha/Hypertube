@@ -2,18 +2,7 @@
 <p>
   Welcome to the Hyperest of Hypertubes&trade;, This is a student made project that does just about nothing at the moment. We wish we could tell you more.
 </p>
-<form (submit)='download()' [formGroup]="downloadInfo" class="signup-container">
-  <mat-form-field>
-    <input
-      matInput
-      name='hash'
-      type='text'
-      formControlName='hash'
-      placeholder="">
-  </mat-form-field>
-  <button mat-raised-button type="submit">download test</button>
-</form>>
 <video id="videoPlayer" style="width:90%; height: auto; margin: 0 5%;" controls onerror="failed(event)">
-  <source src="http://localhost:3001/torrent/stream/5c55b2a947eb1e19f8ada37f" type='video/mp4' codecs='theora, vorbis'>
+  <source [src]="torId" type='video/mp4' codecs='theora, vorbis'>
 </video>
 
