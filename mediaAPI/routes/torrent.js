@@ -183,7 +183,7 @@ router.get('/stream/:movieID', (req, res) => {
     
     var movieID = req.params.movieID;
 
-    var query = { "movieID": movieID };
+    var query = {$or: [{"movieID": movieID}, {"infoHash": movieID}]};
 
     Movie.findOne(query, function (err, movieMeta) {
         
