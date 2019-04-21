@@ -1,8 +1,7 @@
 <hr>
-<p *ngIf="idAvail == false">
-  Welcome to the Hyperest of Hypertubes&trade;, This is a student made project that does just about nothing at the moment. We wish we could tell you more.
+<p *ngIf="idAvail == false" >
+  {{ Message }}
 </p>
-<p *ngIf="started == true">Your download has started, please check back if its ready, you can achieve this by refreshing your browser</p>
 <video *ngIf="idAvail == true" id="videoPlayer" style="width:90%; height: auto; margin: 0 5%;" controls onerror="failed(event)">
   <source [src]="torId" type='video/mp4' codecs='theora, vorbis'>
 </video>

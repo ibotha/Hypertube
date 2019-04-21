@@ -17,13 +17,20 @@ export class HomePageComponent implements OnInit {
   torId: string;
   idAvail: boolean = false;
   torrent: Torrent;
-  started: boolean = false;
   ID: string;
-
+  Welcome: string = "Welcome to the Hyperest of Hypertubes&trade;, This is a student made project that does just about nothing at the moment. We wish we could tell you more.";
+  Busy: string = "Your download has started, please check back if its ready, you can achieve this by refreshing your browser";
+  Message: string;
   constructor(private jsLoader: DynamicScriptLoaderService, private route: ActivatedRoute, private torService: TorrentService) {
     this.route.queryParams.subscribe(parm => {
-      this.ID = parm['ID'].toLowerCase();
-      this.searchDownload();
+      if (parm['ID'])
+      {
+        this.ID = parm['ID'].toLowerCase();
+        this.searchDownload();
+        this.Message = this.Welcome + "<br\>" + this.Busy;
+      }
+      else
+        this.Message = this.Welcome;
     })
   }
 
@@ -40,14 +47,17 @@ export class HomePageComponent implements OnInit {
           {
             if (this.torrent.status == "COMPLETE" || this.torrent.status == "READY")
             {
+              this.Message = "";
               this.idAvail = true;
+              clearInterval()
               this.torId = "http://localhost:3001/torrent/stream/" + complete.movieID
             }
             else if (this.torrent.status == "STARTED")
             {
-              this.idAvail = false
-              this.started = true;
-              setInterval(() => this.searchDownload(), 100000);
+              this.idAvail = false;
+              this.Message = this.Welcome + "<br\>" + this.Busy;
+              clearInterval()
+              setInterval(() => this.searchDownload(), 5000);
             }else
               this.idAvail = false;
           }
@@ -60,5 +70,9 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
     this.jsLoader.loadScript('videoerror');
+  }
+
+  ngOnDestroy() {
+    clearInterval()
   }
 }
