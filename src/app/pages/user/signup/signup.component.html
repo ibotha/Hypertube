@@ -6,7 +6,7 @@
             name='username'
             type='text'
             formControlName='username'
-            placeholder="Username">
+            placeholder="Yousername">
             <mat-error *ngIf="signup.get('username').invalid">Needs to be min 3, max 150 characters</mat-error>
         </mat-form-field>
     <mat-form-field>
@@ -68,13 +68,22 @@
         disabled
         >Sign Up</button>
     </div>
-    <!-- SSO -->
-    <div class="OmniAuths">
-      <a class="red"
+    <div class="signup-button-div">
+      <button
+        *ngIf="signup.get('email').valid"
         color="primary"
-        href="http://localhost:3000/auth/google"
         mat-raised-button
-        >Google +</a>
+        (click)="onResend()"
+        type="button"
+      >Resend Verify</button>
+      <p
+        *ngIf="signup.get('email').invalid"
+        disabled
+      >To resend verification email, please fill in the email field</p>
+      <p *ngIf="msg">{{ msg }}</p>
+    </div>
+    <!-- SSO -->
+    <div class="OmniAuths full-width">
       <a class="black"
       color="primary"
       href="http://localhost:3000/auth/42"

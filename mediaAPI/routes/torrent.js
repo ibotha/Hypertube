@@ -15,7 +15,7 @@ const progress      = require('cli-progress');
 
 // REQUEST TO TORRENT FILE
 router.post('/download/', (req, res) => {
-    
+    console.log(req.body);
     // PROCESS REQUEST ( INFO HASH / MAGNET LINK / LINK TO TORRENT FILE )
     var torrentLink = req.body.torrentLink;
 
@@ -183,7 +183,7 @@ router.get('/stream/:movieID', (req, res) => {
     
     var movieID = req.params.movieID;
 
-    var query = { "movieID": movieID };
+    var query = {$or: [{"movieID": movieID}, {"infoHash": movieID}]};
 
     Movie.findOne(query, function (err, movieMeta) {
         
@@ -298,7 +298,6 @@ router.get('/stream/:movieID', (req, res) => {
                     res.send(movieMeta);
                 }
             } else {
-
                 if ( range ) {
 
                     // DECODE RANGE REQUEST
@@ -351,6 +350,20 @@ router.delete('/delete/:movieID', (req, res) => {
             if (err)
                 console.log(err);
         });
+    })
+});
+
+router.get('/isAvailible/:hash', (req, res) => {
+    var id = req.params.hash;
+    var find = Movie.findOne({$or: [{movieID: id}, {infoHash: id}]});
+    find.exec().then(val => {
+        if (val)
+            res.status(200).jsonp(val);
+        else
+            res.status(200).jsonp(null);
+    }).catch(err => {
+        console.log("an error has occured " + err)
+        res.status(403);
     })
 });
 

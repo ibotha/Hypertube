@@ -80,3 +80,7 @@ mat-error {
   text-align: center;
   color: rgba(217, 69, 61) !important;
 }
+
+.full-width > a {
+  width: 90% !important;
+}

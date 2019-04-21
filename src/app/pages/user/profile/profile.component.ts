@@ -40,18 +40,17 @@ export class ProfileComponent  implements OnInit {
     this.changePassword = value;
   }
 
-  editingUsername(value: Boolean): void {
-    this.editingUsernameBool = value;
-  }
-
-  editingEmail(value: Boolean): void {
-    this.editingEmailBool = value;
+  updateUser() {
+    // console.log(this.userInfo.valid);
+    // console.log(this.userInfo);
+    this.userService.updateUser(this.userInfo);
   }
 
   ngOnInit() {
     this.userService.getUser().subscribe(res => {
-      console.log(res);
       this.parsed = res;
+      this.userInfo.setValue({username: this.parsed['username'], email: this.parsed['email'], firstname: this.parsed['firstName'],
+                              lastname: this.parsed['lastName']});
       this.jsLoader.loadScript('profilepicture');
     });
   }

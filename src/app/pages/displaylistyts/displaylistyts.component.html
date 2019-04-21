@@ -1,3 +1,4 @@
+<div class="{{ ((totalPosts > 5 && query) ? 'all' : 'allmore') + '  skiptranslate' }}">
 <mat-card class="">
   <form (submit)='onSubmit()' [formGroup]='search' class="searchTerm">
     <mat-form-field class="example-full-width">
@@ -61,9 +62,8 @@
       </mat-expansion-panel-header>
       <mat-action-row class="download-list">
         <div>
-          <p>Hash:: {{ o['hash'] }}</p>
           <p>{{ o['size'] }} </p>
-          <a href="{{ o['url'] }}"><button>Download</button></a>
+          <button (click)="StartDownload(o['hash'])">Stream</button>
         </div>
       </mat-action-row>
     </mat-expansion-panel>
@@ -71,4 +71,5 @@
     </mat-card>
   </div>
   <mat-paginator *ngIf='totalPosts > 5 && query' class="page" (page)='onChanged($event)' [pageIndex]="currPage - 1" [length]="totalPosts" [pageSize]="postPerPage" [pageSizeOptions]="pageSizeOptions"></mat-paginator>
+  </div>
 </div>

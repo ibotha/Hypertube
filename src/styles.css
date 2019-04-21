@@ -6,7 +6,8 @@
 }
 
 body {
-  margin: 0 0 70px 0;
+  top: 0px !important;
+  margin: 0;
   background-color: rgb(35, 35, 35) !important;
   color: whitesmoke;
 }
@@ -33,4 +34,19 @@ mat-card {
 
 mat-spinner {
   margin: 50px auto;
+}
+
+.skiptranslate {
+}
+
+.skiptranslate > .goog-te-banner-frame {
+  display: none;
+}
+
+#goog-gt-tt {
+  display: none !important;
+}
+
+#goog-gt-tt :hover {
+  visibility: hidden !important;
 }

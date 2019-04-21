@@ -1,26 +1,33 @@
-<mat-toolbar color="primary">
-  <span><a routerLink="/">Hyperest of Hypertubes&trade;</a></span>
-  <span class="spacer"></span>
+<mat-sidenav #sidenav mode="side" [(opened)]="opened">
   <ul *ngIf='!parsed'>
-    <li>
-      <a mat-raised-button routerLink="/login" color="primary" routerLinkActive="mat-accent">Login</a>
-    </li>
-    <li>
-      <a mat-raised-button routerLink="/signup" color="primary" routerLinkActive="mat-accent">Signup</a>
-    </li>
+      <li>
+        <a mat-raised-button routerLink="/login" color="primary" routerLinkActive="mat-accent" class="side_btn" (click)="sidenav.toggle()">Login</a>
+      </li>
+      <li>
+        <a mat-raised-button routerLink="/signup" color="primary" routerLinkActive="mat-accent" class="side_btn" (click)="sidenav.toggle()">Signup</a>
+      </li>
   </ul>
   <ul *ngIf='parsed'>
     <li>
-      <a mat-raised-button routerLink="/listarchive" color="primary" routerLinkActive="mat-accent">Search Archive</a>
+      <a mat-raised-button routerLink="/listarchive" color="primary" routerLinkActive="mat-accent" class="side_btn" (click)="sidenav.toggle()">Search Archive</a>
     </li>
     <li>
-      <a mat-raised-button routerLink="/listyts" color="primary" routerLinkActive="mat-accent">Search YTS</a>
+      <a mat-raised-button routerLink="/listyts" color="primary" routerLinkActive="mat-accent" class="side_btn" (click)="sidenav.toggle()">Search YTS</a>
     </li>
     <li>
-      <a mat-raised-button routerLink="/profile" color="primary" routerLinkActive="mat-accent">Profile</a>
+      <a mat-raised-button routerLink="/profile" color="primary" routerLinkActive="mat-accent" class="side_btn" (click)="sidenav.toggle()">Profile</a>
     </li>
     <li>
-      <a mat-raised-button href="http://localhost:3000/user/logout" color="primary" routerLinkActive="mat-accent">Logout</a>
+      <a mat-raised-button href="http://localhost:3000/user/logout" color="primary" routerLinkActive="mat-accent" class="side_btn" (click)="sidenav.toggle()">Logout</a>
     </li>
   </ul>
-</mat-toolbar>
+</mat-sidenav>
+
+  <mat-toolbar color=primary>
+    <span><a mat-raised-button color="primary" routerLink="/">Hyperest of Hypertubes&trade;</a></span>
+    <span class="spacer"></span>
+    <a class="menu" mat-raised-button color="primary" (click)="sidenav.toggle()"><i class="material-icons skiptranslate">reorder</i></a>
+  </mat-toolbar>
+
+
+

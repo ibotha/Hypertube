@@ -75,3 +75,7 @@ mat-error {
 .signup-button-div > button {
   width: 100%;
 }
+
+.full-width > a {
+  width: 90% !important;
+}

@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Injectable } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { UserService } from 'src/app/service/user.service';
-import { FormGroup, FormControl } from '@angular/forms';
 import { DisplayListYTSComponent } from '../displaylistyts/displaylistyts.component';
 
 @Component ({
@@ -11,19 +10,28 @@ import { DisplayListYTSComponent } from '../displaylistyts/displaylistyts.compon
   styleUrls: ['./header.component.css']
 })
 
+@Injectable({providedIn: 'root'})
+
 export class HeaderComponent implements OnInit {
   title: String = 'Hyperest of the Hypertoobes&trade;';
   parsed;
   preparsed;
-  constructor(private userService: UserService, private router: Router) {
+  opened: boolean;
+
+  constructor(private userService: UserService, private router: Router) {}
+
+  checkLogin(): void {
+    this.userService.getUser().subscribe(res => {
+      this.preparsed = res;
+      this.parsed = (this.preparsed) ? res : null;
+    });
   }
 
   ngOnInit() {
-    this.router.events.subscribe(() => {
-      this.userService.getUser().subscribe(res => {
-        this.preparsed = res;
-        this.parsed = (this.preparsed) ? res : null;
-      });
+    this.router.events.subscribe((thing) => {
+      if (thing instanceof NavigationEnd) {
+        this.checkLogin();
+      }
     });
   }
 }

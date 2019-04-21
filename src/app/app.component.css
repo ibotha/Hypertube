@@ -1,1 +1,8 @@
+.mat-drawer-container {
+  background-color: initial;
+  color: initial;
+}
 
+mat-sidenav-container {
+  height: 100vh;
+}

@@ -10,6 +10,18 @@ export class UserService {
 
   }
 
+  resendVerify(email, cb) {
+    const obj = { email: email };
+    this.httpclient.post<{message: any}>('http://localhost:3000/user/resendVerify', obj,
+      { withCredentials: true } ).subscribe(responsedata => {
+        if (responsedata['message'] !== 'OK') {
+          cb(responsedata['message']);
+        } else {
+          cb(responsedata['message']);
+        }
+      });
+  }
+
   getUser() {
     return this.httpclient.get<{message: any}>('http://localhost:3000/user/currUser',  { withCredentials: true });
   }
@@ -25,9 +37,16 @@ export class UserService {
     });
   }
 
+  updateUser(user: FormGroup) {
+    this.httpclient.post<{message: string}>('http://localhost:3000/user/update', user.value, { withCredentials: true } )
+    .subscribe((thing) => {
+      console.log(thing);
+      this.router.navigate(['/profile']);
+    });
+  }
+
   loginUser(user: User) {
-    const url = 'http://localhost:3000/user/login?username=' + user.email + '&password=' + user.password + '&firstname='
-      + user.firstname + '&lastname=' + user.lastname;
+    const url = 'http://localhost:3000/user/login?username=' + user.username + '&password=' + user.password;
     this.httpclient.get<{message: any}>(url, { withCredentials: true }).subscribe(responsedata => {
       const extras: NavigationExtras = {
         queryParams: {

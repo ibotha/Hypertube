@@ -3,8 +3,7 @@ const router		= express.Router();
 const fs        = require('fs');
 
 router.get('/video', function(req, res) {
-    const path = 'backend/assets/sample2.mkv'
-    console.log(path);
+    const path = 'backend/assets/sample.mp4'
     const stat = fs.statSync(path)
     const fileSize = stat.size
     const range = req.headers.range

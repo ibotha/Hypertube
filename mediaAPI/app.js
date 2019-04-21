@@ -1,12 +1,13 @@
 const express = require("express");
 const app = express();
+const cors = require('cors');
 
 const body_parser = require("body-parser");
 const torrentRoute = require('./routes/torrent');
 const mongoose = require('mongoose');
 const Movie = require('./database/movie.schema');
 
-const port = process.env.port || 3000;
+const port = process.env.port || 3001;
 const url = 'mongodb://localhost:27017/Hypertube';
 
 mongoose.set('useCreateIndex', true);
@@ -23,6 +24,11 @@ mongoose.connect(url, { useNewUrlParser: true }).then(() => {
 })
 
 app.use(body_parser.json());
+
+app.use(cors({origin: [
+    "http://localhost:8080"
+  ], credentials: true}));
+  
 
 app.use('/', express.static('public'));
 

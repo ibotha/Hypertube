@@ -16,7 +16,6 @@ passport.use(new FortyTwoStrategy({
 function(accessToken, refreshToken, profile, cb) {
   User.findOne( { ssoid: { intra: profile._json.id.toString() } } ).then(res => {
     if (res) {
-      console.log("Hello???");
       return cb(null, res);
     } else {
       var u = new User({
@@ -29,11 +28,9 @@ function(accessToken, refreshToken, profile, cb) {
       u.save().then(res => {
         return cb(null, res);
       }).catch(err => {
-        console.log("Hello #2 " + err);
       })
     }
   }).catch(err => {
-    console.log("Hello #3");
   });
 }
 ));

@@ -5,25 +5,25 @@ const settings = require('../credentials/mail.json');
 var transport = mailer.createTransport({
   service: 'gmail',
   auth: {
-    user: settings.username,
-    pass: settings.password
+    user: settings.Username,
+    pass: settings.Password
   }
 });
 
-function sendMail(email, subject, message) {
+function sendEMail(email, subject, message, html) {
   var mailOptions = {
     from: 'HyperestOfHypertubes@gmail.com',
     to: email + ", <" + email + ">",
     subject: subject,
-    text: message
+    text: message,
+    html: html
   }
-  mailer.sendMail(mailOptions).then(info => {
-
+  transport.sendMail(mailOptions).then(info => {
   }).catch(err => {
     console.log(err);
   })
 }
 
 module.exports = {
-  sendMail: sendMail
+  sendMail: sendEMail
 }

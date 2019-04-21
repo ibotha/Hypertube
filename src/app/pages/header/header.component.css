@@ -5,13 +5,7 @@ ul {
 }
 
 ul > li {
-  padding: 5px;
-  margin: 2px;
-}
-
-ul {
-  display: flex;
-  flex-direction: row;
+  margin: 2px 0;
 }
 
 a {
@@ -23,3 +17,23 @@ a {
   flex: 1 1 auto;
 }
 
+mat-sidenav-content {
+  display: flex;
+  flex-direction: row;
+}
+
+mat-sidenav {
+  width: 200px;
+  padding: 0;
+  background-color: rgba(180, 200, 220, 0.8);
+}
+
+.side_btn {
+  margin: 5px 0 !important;
+  padding: 10px !important;
+  display: block;
+}
+
+.menu {
+  padding: 0px;
+}

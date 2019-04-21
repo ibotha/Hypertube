@@ -1,40 +1,20 @@
 const user = require('../database/user.schema');
 
-function verify(ssoid, type, email, verification) {
+function verify(username, email, verification, cb) {
   var search = {
+    username: username,
     email: email,
-    verification, verification
+    verification_key: verification,
+    verified: false
   };
-  switch (type) {
-    case "google":
-      search.push( { ssoid: { google: ssoid } } );
-      break;
-    case "facebook":
-      search.push( { ssoid: { facebook: ssoid } } );
-      break;
-    case "intra":
-      search.push( { ssoid: { intra: ssoid } } );
-      break;
-    case "twitter":
-      search.push( { ssoid: { twitter: ssoid } } );
-      break;
-    case "standard":
-      break;
-  }
-  user.find(search).then(user => {
-    returnPromise(user, null);
+  user.findOneAndUpdate(search, { verified: true }).then(res => {
+    if (res)
+      cb("Account Verified");
+    else
+      cb("Account is not found, or you are stupid, or you're already verified.");
   }).catch(err => {
-    returnPromise(null, err);
+    cb("well, verify failed");
   })
-}
-
-function returnPromise(success, err) {
-  return new Promise(function(resolve, reject) {
-    if (err)
-      reject(err)
-    if (success)
-      resolve(success);
-  });
 }
 
 module.exports = {

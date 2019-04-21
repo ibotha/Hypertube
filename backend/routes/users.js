@@ -7,17 +7,18 @@ const passport        = require('passport');
 const _mongo          = require('mongodb');
 const imagesave       = require('../functions/saveimage');
 const verify          = require('../functions/verification');
+const mail            = require('../functions/mail');
 
 passport.use(new LocalStrategy({
     usernameField: 'username',
     passwordField: 'password'
   },
-  function(email, password, done) {
-    User.findOne({ email: email }, function (err, user) {
-      if (err) { return done(err); }
-      if (!user) { return done(null, false); }
+  function(username, password, done) {
+    User.findOne({ username: username, verified: true }, function (err, user) {
+      if (err) { return done(err); };
+      if (!user) { return done(null, false); };
       let hash = bcrypt.compareSync(password, user['password']);
-      if (!hash) { return done(null, false); }
+      if (!hash) { return done(null, false); };
       return done(null, user);
     });
   }
@@ -27,18 +28,22 @@ router.post('/create', function(req, res, next) {
   var firstname = req.body.firstname;
   var lastname = req.body.lastname;
   var email = req.body.email;
+  var username = req.body.username;
   var password = req.body.password;
   let hash = bcrypt.hashSync(password, 10);
+  let verification = bcrypt.hashSync(hash + Math.floor(Math.random() * 2048), 10);
     const user = new User({
       email: email,
-      password: hash
+      password: hash,
+      verification_key: verification,
+      firstName: firstname,
+      lastName: lastname,
+      username: username
     });
     user.save().then((result) => {
-      new User({
-        firstName: firstname,
-        lastName: lastname,
-        ssoid: result._id
-      }).save();
+      var verifykey = req.protocol + "://" + req.get('host') + "/user/verify?username=" + username + "&email=" + email + "&verification=" + verification;
+      var html = "<h1> Good day " + firstname + " </h1> <br><hr> <p>Verify Account please</p>" + "<a href='"+verifykey+"'><input type='button' value='verify'></a>";
+      mail.sendMail(email, "Successful creation", "User Verification", html);
       res.status(201).json({message: "User added successfully"});
     }).catch(err => {
       res.status(201).json({message: "User added unsuccessfully " + err});
@@ -55,23 +60,27 @@ router.get('/currUser', (req, res) => {
   if (req.session.passport)
   {
     var oID =  new _mongo.ObjectID(req.session.passport.user);
-    User.findOne({_id: oID}).then(user => {
-      res.status(200).json(user);
-    }).catch(err => {
-      res.status(200).json({'Erorr':err})
-    });
-  }
+    if (oID instanceof _mongo.ObjectID)
+    {
+      User.findOne({_id: oID}).then(user => {
+        res.status(200).json(user);
+      }).catch(err => {
+        res.status(200).json( { 'Erorr': err } )
+      });
+    }else
+      res.status(404);
+  }else
+    res.status(200).json();
 })
 
 router.get('/getCurr', (req, res) => {
-  console.log(req.session.passport);
   res.status(200).json({
     id: req.session.passport
   })
 });
 
 router.get('/fail', (req, res) => {
-  res.status(201).jsonp({"msg": "NOPE"});
+  res.status(200).jsonp( { "msg": "NOPE" } );
 })
 
 router.get('/', passport.authenticate('local', { failureRedirect: '/user/fail'}));
@@ -79,7 +88,7 @@ router.get('/', passport.authenticate('local', { failureRedirect: '/user/fail'})
 router.get('/logout', (req, res) => {
   req.session.destroy();
   req.logout();
-  res.redirect('http://localhost:8080');
+  res.redirect(req.protocol + '://' + req.get('host').split(':')[0] + ':8080');
 })
 
 router.post('/file/upload/profile', function(req, res) {
@@ -88,17 +97,41 @@ router.post('/file/upload/profile', function(req, res) {
   })
 })
 
-router.get('/user/verify', function(req, res) {
-  var adr = req.protocol + '://' + req.get('host') + req.url;
-	var q = url.parse(adr, true);
-	let mail = q.query.email;
-  let verifyKey = q.query.verify;
-  let type = q.query.type;
-	verify.verify(mail, type, verifyKey).then(res => {
-
-  }).catch(err => {
-
-  })
+router.get('/verify', function(req, res) {
+    let mail = req.query.email;
+    let verifyKey = req.query.verification;
+    let username = req.query.username;
+	  verify.verify(username, mail, verifyKey, cb => {
+    res.redirect(req.protocol + "://" + req.get('host').split(":")[0] + ":8080/login?verifymsg=" + cb);
+  });
 })
+
+router.post('/update', function(req, res) {
+  if (req.body.email && req.body.username && req.body.firstname && req.body.lastname) {
+    User.findByIdAndUpdate(req.session.passport.user, {email: req.body.email, username: req.body.username,
+    firstName: req.body.firstname, lastName: req.body.lastname}).then(() => {
+      res.status(201).json({message: "Success"});
+    }).catch(err => {
+      res.status(200).json({message: "Error has occured => " + err});
+    })
+  } else {
+    res.status(304).json({message: "Invalid Info"});
+  }
+});
+
+router.post('/resendVerify', function(req, res) {
+  var email = req.body.email;
+  User.findOne({email: email}).then(user => {
+    if (user) {
+      var verifykey = req.protocol + "://" + req.get('host') + "/user/verify?username=" + user['username'] + "&email=" + user['email'] + "&verification=" + user['verification_key'];
+      var html = "<h1> Good day " + user['firstName'] + " </h1> <br><hr> <p>Verify Account please</p>" + "<a href='"+verifykey+"'><input type='button' value='verify'></a>";
+      mail.sendMail(email, "Successful creation", "User Verification", html);
+      res.status(201).json({message: "Email sent successfully"});
+    }else
+      res.status(201).json({message: "No User Found"});
+  }).catch(err => {
+    res.status(200).json('{"msg": err}');
+  })
+});
 
 module.exports = router;
