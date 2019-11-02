@@ -16,6 +16,6 @@
     "mongoose-findorcreate": "^3.0.0",
     "nodemon": "^1.18.9",
     "rimraf": "^2.6.3",
-    "webtorrent": "^0.103.0"
+    "webtorrent": "^0.107.16"
   }
 }
